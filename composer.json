@@ -1,0 +1,15 @@
+{
+    "name": "autoloader/module-connexion",
+    "autoload": {
+        "psr-4": {
+            "Autoloader\\ModuleConnexion\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "jules-jean-louis1",
+            "email": "jules.jean-louis@laplateforme.io"
+        }
+    ],
+    "require": {}
+}
