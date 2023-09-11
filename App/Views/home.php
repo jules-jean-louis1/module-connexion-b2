@@ -12,13 +12,13 @@
 </head>
 <body>
     <header>
-
+        <?php require 'App/Views/import/header.php'; ?>
     </header>
     <main>
         <h1>Home</h1>
     </main>
     <footer>
-
+        <?php require 'App/Views/import/footer.php'; ?>
     </footer>
 </body>
 </html>
