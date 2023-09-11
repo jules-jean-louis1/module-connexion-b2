@@ -28,4 +28,9 @@ class AuthModels extends AbstractDatabase
             return false;
         }
     }
+
+    public function register(string $username, string $email, string $firstname, string $lastname, string $password, $avatar)
+    {
+
+    }
 }

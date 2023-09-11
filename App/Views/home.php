@@ -16,6 +16,7 @@
         <?php require 'App/Views/import/header.php'; ?>
     </header>
     <main>
+        <div id="containerFormLoginRegister"></div>
         <h1>Home</h1>
     </main>
     <footer>

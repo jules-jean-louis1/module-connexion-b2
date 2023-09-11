@@ -59,7 +59,7 @@ class AuthController
             return false;
         }
     }
-    private function generateAvatarImage($text, $backgroundColor,string $firstname,string $lastname, string $username)
+    private function generateAvatarImage($text, $backgroundColor, string $username)
     {
         $canvas = imagecreatetruecolor($canvasWidth, $canvasHeight);
 
@@ -141,7 +141,20 @@ class AuthController
         }
         if (empty($errors)) {
             $user = new AuthModels();
-            $user->register($username, $email, $firstname, $lastname, $password);
+            if (!$this->CheckIfUsernameExist($username)) {
+                $errors['username'] = 'Le champ username est déjà utilisé';
+            } elseif (!$this->CheckIfEmailExist($email)) {
+                $errors['email'] = 'Le champ email est déjà utilisé';
+            } else {
+                $firstLetter = strtoupper(substr($firstname, 0, 1));
+                $backgroundColor = sprintf('#%06X', mt_rand(0, 0xFFFFFF));
+                $avatar = $this->generateAvatarImage($firstLetter, $backgroundColor, $username);
+                // Ajouter l'utilisateur dans la base de données
+                $user->register($username, $email, $firstname, $lastname, $password, $avatar);
+                $errors['success'] = 'Votre compte a bien été créé';
+            }
+            echo json_encode($errors);
+
         } else {
             $json = json_encode($errors);
             echo $json;
