@@ -2,7 +2,9 @@
     "name": "autoloader/module-connexion",
     "autoload": {
         "psr-4": {
-            "Autoloader\\ModuleConnexion\\": "app/"
+            "App\\Controllers\\": "App/Controllers",
+            "App\\Models\\": "App/Models",
+            "App\\Views\\": "App/Views"
         }
     },
     "authors": [
@@ -11,5 +13,7 @@
             "email": "jules.jean-louis@laplateforme.io"
         }
     ],
-    "require": {}
+    "require": {
+        "altorouter/altorouter": "^2.0"
+    }
 }
