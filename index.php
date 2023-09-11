@@ -14,6 +14,13 @@ $router->map( 'GET', '/contact/', function() {
     require 'App/Views/contact.php';
 });
 
+/* Form Auth */
+$router->map('GET', '/login', function () {
+    require 'App/Views/import/form/loginForm.php';
+});
+$router->map('POST', '/register', function () {
+    require 'App/Views/import/form/registerForm.php';
+});
 // match current request url
 $match = $router->match();
 
