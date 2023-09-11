@@ -16,4 +16,16 @@ class AuthModels extends AbstractDatabase
             return false;
         }
     }
+    public function VerifyIfExist(string $field, string $nameOfField): bool
+    {
+        $bdd = $this->getBdd();
+        $req = $bdd->prepare('SELECT user FROM users WHERE ' . $nameOfField . ' = :' . $field);
+        $req->execute([$field => $field, $nameOfField => $nameOfField]);
+        $user = $req->fetch();
+        if ($user) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
