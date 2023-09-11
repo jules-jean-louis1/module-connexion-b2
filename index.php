@@ -18,7 +18,7 @@ $router->map( 'GET', '/contact/', function() {
 $router->map('GET', '/login', function () {
     require 'App/Views/import/form/loginForm.php';
 });
-$router->map('POST', '/register', function () {
+$router->map('GET', '/register', function () {
     require 'App/Views/import/form/registerForm.php';
 });
 // match current request url

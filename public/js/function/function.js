@@ -2,6 +2,7 @@
 
 function createDialog()
 {
+    const containerForm = document.querySelector('#containerFormLoginRegister');
     const dialog = document.createElement("dialog");
     dialog.setAttribute("id", "dialog");
     dialog.setAttribute("class", "w-[26.25rem] h-[55%] bg-[#202225] border-[1px] border-[#a8b3cf33] rounded-[14px] shadow-lg z-50");
@@ -66,16 +67,18 @@ export async function loginRegisterForm(btnLogin)
         const TextchangeLogin = document.getElementById("TextchangeLogin");
         /* Récupere le formulaire de connexion */
         async function Login() {
-            const responseLogin = await fetch(`${window.location.origin}/moduleconnexion/login`);
+            const responseLogin = await fetch(`${window.location.origin}/moduleconnexionb2/login`);
             const dataLogin = await responseLogin.text();
+            containerDiv.innerHTML = '';
             containerDiv.innerHTML = dataLogin;
             TextchangeLogin.textContent = "Vous n'avez pas de compte ?";
-            const formLogin = document.querySelector('#formLogin');
+            buttonLogin.textContent = "S'inscrire";
+            const formLogin = document.querySelector('#login-form');
             formLogin.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const formData = new FormData(formLogin);
                 try {
-                    const response = await fetch(`${window.location.origin}/moduleconnexion/login/submit`, {
+                    const response = await fetch(`${window.location.origin}/moduleconnexionb2/login/submit`, {
                         method: 'POST',
                         body: formData
                     });
@@ -88,16 +91,18 @@ export async function loginRegisterForm(btnLogin)
         }
         /* Récupere le formulaire d'inscription */
         async function Register() {
-            const responseRegister = await fetch(`${window.location.origin}/moduleconnexion/register`);
+            const responseRegister = await fetch(`${window.location.origin}/moduleconnexionb2/register`);
             const dataRegister = await responseRegister.text();
+            containerDiv.innerHTML = '';
             containerDiv.innerHTML = dataRegister;
             TextchangeLogin.textContent = "Vous avez déjà un compte ?";
+            buttonLogin.textContent = "Se connecter";
             const formRegister = document.querySelector('#formRegister');
             formRegister.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const formData = new FormData(formRegister);
                 try {
-                    const response = await fetch(`${window.location.origin}/moduleconnexion/register/submit`, {
+                    const response = await fetch(`${window.location.origin}/moduleconnexionb2/register/submit`, {
                         method: 'POST',
                         body: formData
                     });
@@ -109,6 +114,17 @@ export async function loginRegisterForm(btnLogin)
             });
         }
         /* Change le formulaire en fonction du bouton cliqué */
+        Login();
+        buttonLogin.addEventListener('click', () => {
+            if(buttonLogin.textContent == "S'inscrire") {
+                ParaModifyText.textContent = "S'inscrire sur le site";
+                Register();
+            } else {
+                ParaModifyText.textContent = "Se connecter à votre compte";
+                buttonLogin.textContent = "Se connecter";
+                Login();
+            }
+        });
 
         const buttonClose = document.querySelector('#buttonClose');
         buttonClose.addEventListener('click', () => {

@@ -1,7 +1,7 @@
 <?php
 
 ?>
-<form action="" method="post">
+<form action="" method="post" id="formRegister">
     <div>
         <label for="username">Username</label>
         <input type="text" name="username" id="username">
