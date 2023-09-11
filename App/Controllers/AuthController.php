@@ -1,9 +1,18 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\AuthModels;
 
 class AuthController
 {
+    public function verifyField($field)
+    {
+        if (isset($_POST[$field]) && !empty(trim($_POST[$field]))) {
+            return $_POST[$field];
+        } else {
+            return false;
+        }
+    }
     public function ValidUsername(string $username): bool
     {
         if (strlen($username) < 3 || strlen($username) > 20) {
@@ -24,8 +33,12 @@ class AuthController
 
         return $username;
     }
-    public function VerifyIfUserExist(string $username): bool
+    public function CheckPassword(string $password): string
     {
+        $password = trim($password);
+        $password = filter_var($password, FILTER_SANITIZE_STRING);
+        $password = password_hash($password, PASSWORD_DEFAULT);
 
+        return $password;
     }
 }
