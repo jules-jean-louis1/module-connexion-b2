@@ -51,10 +51,68 @@ function createDialog()
 
 
 /* Function to Register Login */
-export async function loginRegisterForm(ButtonLogin)
+export async function loginRegisterForm(btnLogin)
 {
     const containerForm = document.querySelector('#containerFormLoginRegister');
     containerForm.innerHTML = '';
     createDialog();
 
+    const dialog = document.querySelector('#dialog');
+    const containerDiv = document.querySelector('#containerDiv');
+    btnLogin.addEventListener('click', async () => {
+        dialog.setAttribute("open", "");
+        const buttonLogin = document.querySelector('#buttonLogin');
+        const ParaModifyText = document.getElementById("ParaModifyText");
+        const TextchangeLogin = document.getElementById("TextchangeLogin");
+        /* Récupere le formulaire de connexion */
+        async function Login() {
+            const responseLogin = await fetch(`${window.location.origin}/moduleconnexion/login`);
+            const dataLogin = await responseLogin.text();
+            containerDiv.innerHTML = dataLogin;
+            TextchangeLogin.textContent = "Vous n'avez pas de compte ?";
+            const formLogin = document.querySelector('#formLogin');
+            formLogin.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(formLogin);
+                try {
+                    const response = await fetch(`${window.location.origin}/moduleconnexion/login/submit`, {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const data = await response.json();
+                    console.log(data);
+                } catch (error) {
+                    console.log(error);
+                }
+            });
+        }
+        /* Récupere le formulaire d'inscription */
+        async function Register() {
+            const responseRegister = await fetch(`${window.location.origin}/moduleconnexion/register`);
+            const dataRegister = await responseRegister.text();
+            containerDiv.innerHTML = dataRegister;
+            TextchangeLogin.textContent = "Vous avez déjà un compte ?";
+            const formRegister = document.querySelector('#formRegister');
+            formRegister.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(formRegister);
+                try {
+                    const response = await fetch(`${window.location.origin}/moduleconnexion/register/submit`, {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const data = await response.json();
+                    console.log(data);
+                } catch (error) {
+                    console.log(error);
+                }
+            });
+        }
+        /* Change le formulaire en fonction du bouton cliqué */
+
+        const buttonClose = document.querySelector('#buttonClose');
+        buttonClose.addEventListener('click', () => {
+            dialog.close();
+        });
+    });
 }
