@@ -1,4 +1,5 @@
 <?php
+var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -13,14 +14,14 @@
 </head>
 <body>
     <header>
-        <?php require 'src/View/import/header.php'; ?>
+        <?php require_once 'src/View/import/header.php'; ?>
     </header>
     <main>
         <div id="containerFormLoginRegister"></div>
         <h1>Home</h1>
     </main>
     <footer>
-        <?php require 'src/View/import/footer.php'; ?>
+        <?php require_once 'src/View/import/footer.php'; ?>
     </footer>
 </body>
 </html>

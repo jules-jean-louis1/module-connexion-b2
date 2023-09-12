@@ -35,6 +35,10 @@ $router->map('POST', '/login/submit', function () use ($authController) {
     $authController->login();
 }, 'login_submit');
 
+/* Deconnexion */
+$router->map('GET', '/logout', function () use ($authController) {
+    $authController->logout();
+}, 'logout');
 // match current request url
 $match = $router->match();
 
