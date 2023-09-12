@@ -154,4 +154,32 @@ class AuthController
             echo $json;
         }
     }
+
+    public function login()
+    {
+        $email = $this->verifyField('email');
+        $password = $this->verifyField('password');
+        $errors = [];
+        $user = new AuthModel();
+
+        if (!$email) {
+            $errors['email'] = 'Le champ email est requis';
+        }
+        if (!$password) {
+            $errors['password'] = 'Le champ password est requis';
+        }
+        if (empty($errors)) {
+            $email = $this->ValidFieldForm($email);
+            $password = $this->ValidFieldForm($password);
+            $user->login($email, $password);
+            if ($user->login($email, $password)) {
+                $errors['success'] = 'Vous êtes connecté';
+            } else {
+                $errors['error'] = 'Email ou mot de passe incorrect';
+            }
+        } else {
+            $json = json_encode($errors);
+            echo $json;
+        }
+    }
 }

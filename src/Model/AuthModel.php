@@ -60,4 +60,32 @@ class AuthModel extends AbstractDatabase
         $req->bindParam(':role', $role, PDO::PARAM_STR);
         $req->execute();
     }
+
+    public function login(string $email, string $password): bool
+    {
+        $bdd = $this->getBdd();
+        $sql = 'SELECT id, username, email, password, avatar, role FORM users WHERE email OR username = :email';
+        $req = $bdd->prepare($sql);
+        $req->bindParam(':email', $email, PDO::PARAM_STR);
+        $req->execute();
+        $user = $req->fetch();
+        if ($user) {
+            if (password_verify($password, $user['password'])) {
+                $jeton = bin2hex(openssl_random_pseudo_bytes(6));
+                $_SESSION['user'] = [
+                    'id' => $user['id'],
+                    'username' => $user['username'],
+                    'email' => $user['email'],
+                    'avatar' => $user['avatar'],
+                    'role' => $user['role'],
+                    'token' => $jeton
+                ];
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 }

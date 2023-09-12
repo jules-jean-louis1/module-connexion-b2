@@ -30,6 +30,9 @@ $router->map('GET', '/register', function () {
 $router->map('POST', '/register/submit', function () use ($authController) {
     $authController->register();
 }, 'register_submit');
+$router->map('POST', '/login/submit', function () use ($authController) {
+    $authController->login();
+}, 'login_submit');
 
 // match current request url
 $match = $router->match();
