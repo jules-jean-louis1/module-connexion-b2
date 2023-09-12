@@ -24,7 +24,6 @@ class AuthController
     {
         $field = trim($field);
         $field = htmlspecialchars($field);
-        $field = filter_var($field, FILTER_SANITIZE_STRING);
 
         return $field;
     }
@@ -107,17 +106,17 @@ class AuthController
         }
         if (!$firstname) {
             $errors['firstname'] = 'Le champ firstname est requis';
-        } elseif (strlen($firstname) < 2 || strlen($firstname) > 20) {
+        } elseif (strlen($firstname) <= 2 || strlen($firstname) >= 20) {
             $errors['firstname'] = 'Le champ firstname doit contenir entre 3 et 20 caractères';
         }
         if (!$lastname) {
             $errors['lastname'] = 'Le champ lastname est requis';
-        } elseif (strlen($lastname) < 2 || strlen($lastname) > 20) {
+        } elseif (strlen($lastname) <= 2 || strlen($lastname) >= 20) {
             $errors['lastname'] = 'Le champ lastname doit contenir entre 3 et 20 caractères';
         }
         if (!$password) {
             $errors['password'] = 'Le champ password est requis';
-        } elseif (strlen($password) < 8 || strlen($password) > 35) {
+        } elseif (strlen($password) <= 8 || strlen($password) >= 35) {
             $errors['password'] = 'Le champ password doit contenir entre 8 et 35 caractères';
         } elseif (!$this->VerifyPassword($password)) {
             $errors['password'] = 'Le mot de passe doit contenir au moins 3 lettres minuscules, 2 lettres majuscules, 2 chiffres et 1 caractère spécial';
@@ -177,6 +176,7 @@ class AuthController
             } else {
                 $errors['error'] = 'Email ou mot de passe incorrect';
             }
+            echo json_encode($errors);
         } else {
             $json = json_encode($errors);
             echo $json;

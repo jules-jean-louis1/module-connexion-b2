@@ -1,9 +1,18 @@
 <?php
 
 namespace App\Model;
+use MongoDB\BSON\Timestamp;
 use PDO;
 class AuthModel extends AbstractDatabase
 {
+    private string $username;
+    private string $email;
+    private string $firstname;
+    private string $lastname;
+    private string $password;
+    private string $avatar;
+    private string $role;
+    private Timestamp $created_at;
     public function UsernameVerify(string $username): bool
     {
         $bdd = $this->getBdd();
@@ -64,8 +73,7 @@ class AuthModel extends AbstractDatabase
     public function login(string $email, string $password): bool
     {
         $bdd = $this->getBdd();
-        $sql = 'SELECT id, username, email, password, avatar, role FORM users WHERE email OR username = :email';
-        $req = $bdd->prepare($sql);
+        $req = $bdd->prepare("SELECT id, username, email, password, avatar, role FROM users WHERE email = :email OR username = :email");
         $req->bindParam(':email', $email, PDO::PARAM_STR);
         $req->execute();
         $user = $req->fetch();
