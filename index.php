@@ -16,7 +16,7 @@ $router->map( 'GET', '/', function() {
 });
 
 // map user details page
-$router->map( 'GET', '/contact/', function() {
+$router->map( 'GET', '/contact', function() {
     require 'src/View/contact.php';
 });
 

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+use App\Model\AuthModel;
 class AuthController
 {
     public function verifyField($field)
@@ -16,8 +16,6 @@ class AuthController
     {
         if (strlen($username) < 3 || strlen($username) > 20) {
             return false;
-        } elseif (preg_match('/[^a-z0-9]/', $username)) {
-            return false;
         } else {
             return true;
         }
@@ -30,24 +28,7 @@ class AuthController
 
         return $password;
     }
-    public function CheckIfEmailExist(string $email): bool
-    {
-        $user = new AuthModels();
-        if ($user->VerifyIfExist($email, 'email')) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    public function CheckIfUsernameExist(string $username): bool
-    {
-        $user = new AuthModels();
-        if ($user->VerifyIfExist($username, 'username')) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+
     public function VerifyPassword(string $password): bool
     {
         // 8 caractères minimum, 3 lettres minuscules minimum, 2 lettres majuscules minimum, 2 chiffres minimum, 1 caractère spécial minimum
@@ -59,6 +40,9 @@ class AuthController
     }
     private function generateAvatarImage($text, $backgroundColor, string $username)
     {
+        $canvasWidth = 200;
+        $canvasHeight = 200;
+
         $canvas = imagecreatetruecolor($canvasWidth, $canvasHeight);
 
         // Convertir la couleur d'arrière-plan en composantes RGB
@@ -101,29 +85,34 @@ class AuthController
         $firstname = $this->verifyField('firstname');
         $lastname = $this->verifyField('lastname');
         $password = $this->verifyField('password');
-        $password_confirm = $this->verifyField('password_confirm');
+        $password_confirm = $this->verifyField('passwordConfirm');
 
         $errors = [];
+        $user = new AuthModel();
 
         if (!$username){
             $errors['username'] = 'Le champ username est requis';
         } elseif (!$this->ValidUsername($username)) {
             $errors['username'] = 'Le champ username doit contenir entre 3 et 20 caractères et ne doit pas contenir de caractères spéciaux';
-        } elseif ($this->CheckIfUsernameExist($username)) {
-            $errors['username'] = 'Le champ username est déjà utilisé';
+        } elseif ($user->VerifyIfUsernameExist($username)) {
+            $errors['username'] = 'Le champ username est déjà utilisé -1';
         }
         if (!$email) {
             $errors['email'] = 'Le champ email est requis';
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = 'Le champ email doit être un email valide';
-        } elseif ($this->CheckIfEmailExist($email)) {
+        } elseif ($user->VerifyIfExist($email, 'email')) {
             $errors['email'] = 'Le champ email est déjà utilisé';
         }
         if (!$firstname) {
             $errors['firstname'] = 'Le champ firstname est requis';
+        } elseif (strlen($firstname) < 2 || strlen($firstname) > 20) {
+            $errors['firstname'] = 'Le champ firstname doit contenir entre 3 et 20 caractères';
         }
         if (!$lastname) {
             $errors['lastname'] = 'Le champ lastname est requis';
+        } elseif (strlen($lastname) < 2 || strlen($lastname) > 20) {
+            $errors['lastname'] = 'Le champ lastname doit contenir entre 3 et 20 caractères';
         }
         if (!$password) {
             $errors['password'] = 'Le champ password est requis';
@@ -133,22 +122,21 @@ class AuthController
             $errors['password'] = 'Le champ password doit contenir au moins 3 lettres minuscules, 2 lettres majuscules, 2 chiffres et 1 caractère spécial';
         }
         if (!$password_confirm) {
-            $errors['password_confirm'] = 'Le champ password_confirm est requis';
+            $errors['passwordConfirm'] = 'Le champ password_confirm est requis';
         } elseif ($password !== $password_confirm) {
-            $errors['password_confirm'] = 'Le champ password_confirm doit être identique au champ password';
+            $errors['passwordConfirm'] = 'Le champ password_confirm doit être identique au champ password';
         }
         if (empty($errors)) {
-            $user = new AuthModels();
-            if (!$this->CheckIfUsernameExist($username)) {
-                $errors['username'] = 'Le champ username est déjà utilisé';
-            } elseif (!$this->CheckIfEmailExist($email)) {
+            if ($user->VerifyIfUsernameExist($username)) {
+                $errors['username'] = 'Le champ username est déjà utilisé -2';
+            } elseif ($user->VerifyIfExist($email, 'email')) {
                 $errors['email'] = 'Le champ email est déjà utilisé';
             } else {
                 $firstLetter = strtoupper(substr($firstname, 0, 1));
                 $backgroundColor = sprintf('#%06X', mt_rand(0, 0xFFFFFF));
                 $avatar = $this->generateAvatarImage($firstLetter, $backgroundColor, $username);
                 // Ajouter l'utilisateur dans la base de données
-                $user->register($username, $email, $firstname, $lastname, $password, $avatar);
+/*                $user->register($username, $email, $firstname, $lastname, $password, $avatar);*/
                 $errors['success'] = 'Votre compte a bien été créé';
             }
             echo json_encode($errors);

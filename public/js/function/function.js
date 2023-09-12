@@ -19,8 +19,11 @@ function addLabelOnFocus(inputElement, labelFor, labelText) {
     });
 }
 /* Function error Handler */
-function showError(input, message){
-
+function showError(smallSelector, message){
+    const small = document.getElementById(smallSelector);
+    small.setAttribute("class", "text-red-500 text-sm font-bold")
+    small.innerHTML = '';
+    small.textContent = message;
 }
 
 /* Function to Create Dialog */
@@ -151,6 +154,25 @@ export async function loginRegisterForm(btnLogin)
                         body: formData
                     });
                     const data = await response.json();
+
+                    if (data.email) {
+                        showError('errorEmail', data.email);
+                    }
+                    if (data.username) {
+                        showError('errorUsername', data.username);
+                    }
+                    if (data.password) {
+                        showError('errorPassword', data.password);
+                    }
+                    if (data.passwordConfirm) {
+                        showError('errorPasswordConfirm', data.passwordConfirm);
+                    }
+                    if (data.firstname) {
+                        showError('errorFirstname', data.firstname);
+                    }
+                    if (data.lastname) {
+                        showError('errorLastname', data.lastname);
+                    }
                     console.log(data);
                 } catch (error) {
                     console.log(error);
