@@ -17,6 +17,9 @@ $router->map( 'GET', '/', function() {
 });
 
 // map user details page
+$router->map( 'GET', '/profil/[i:id]', function( $id ) {
+    require 'src/View/profil.php';
+});
 $router->map( 'GET', '/contact', function() {
     require 'src/View/contact.php';
 });
