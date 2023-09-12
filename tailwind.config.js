@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./App/Views/**/*.php", // Chemin vers les fichiers HTML dans le répertoire "App/Views"
+    "./src/View/**/*.php", // Chemin vers les fichiers HTML dans le répertoire "App/View"
     "./public/js/**/*.js",   // Chemin vers les fichiers JavaScript dans le répertoire "public/js"
   ],
   theme: {

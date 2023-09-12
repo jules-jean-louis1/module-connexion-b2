@@ -1,26 +1,36 @@
 <?php
 require 'vendor/autoload.php';
 
+use App\Controller\{
+    AuthController
+};  
+
+$authController = new AuthController();
+
 $router = new AltoRouter();
 $router->setBasePath('/moduleconnexionb2');
 
 // map homepage
 $router->map( 'GET', '/', function() {
-    require 'App/Views/home.php';
+    require 'src/View/home.php';
 });
 
 // map user details page
 $router->map( 'GET', '/contact/', function() {
-    require 'App/Views/contact.php';
+    require 'src/View/contact.php';
 });
 
 /* Form Auth */
 $router->map('GET', '/login', function () {
-    require 'App/Views/import/form/loginForm.php';
+    require 'src/View/import/form/loginForm.php';
 });
 $router->map('GET', '/register', function () {
-    require 'App/Views/import/form/registerForm.php';
+    require 'src/View/import/form/registerForm.php';
 });
+$router->map('POST', '/register/submit', function () use ($authController) {
+    $authController->register();
+}, 'register_submit');
+
 // match current request url
 $match = $router->match();
 

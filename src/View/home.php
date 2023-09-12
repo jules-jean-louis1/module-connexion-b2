@@ -14,14 +14,14 @@
 </head>
 <body>
     <header>
-        <?php require 'App/Views/import/header.php'; ?>
+        <?php require 'src/View/import/header.php'; ?>
     </header>
     <main>
         <div id="containerFormLoginRegister"></div>
         <h1>Home</h1>
     </main>
     <footer>
-        <?php require 'App/Views/import/footer.php'; ?>
+        <?php require 'src/View/import/footer.php'; ?>
     </footer>
 </body>
 </html>

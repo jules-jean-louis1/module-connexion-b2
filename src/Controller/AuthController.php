@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Controllers;
-use App\Models\AuthModels;
-use Composer\Json\JsonFile;
+namespace App\Controller;
 
 class AuthController
 {
