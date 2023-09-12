@@ -20,15 +20,14 @@ class AuthController
             return true;
         }
     }
-    public function CheckPassword(string $password): string
+    public function ValidFieldForm(string $field): string
     {
-        $password = trim($password);
-        $password = filter_var($password, FILTER_SANITIZE_STRING);
-        $password = password_hash($password, PASSWORD_DEFAULT);
+        $field = trim($field);
+        $field = htmlspecialchars($field);
+        $field = filter_var($field, FILTER_SANITIZE_STRING);
 
-        return $password;
+        return $field;
     }
-
     public function VerifyPassword(string $password): bool
     {
         // 8 caractères minimum, 3 lettres minuscules minimum, 2 lettres majuscules minimum, 2 chiffres minimum, 1 caractère spécial minimum
@@ -95,14 +94,16 @@ class AuthController
         } elseif (!$this->ValidUsername($username)) {
             $errors['username'] = 'Le champ username doit contenir entre 3 et 20 caractères et ne doit pas contenir de caractères spéciaux';
         } elseif ($user->VerifyIfUsernameExist($username)) {
-            $errors['username'] = 'Le champ username est déjà utilisé -1';
+            $errors['username'] = 'Ce nom d\'utlisateur est déjà utilisé';
+            $errors['useUsername'] = 'Ce nom d\'utlisateur est déjà utilisé';
         }
         if (!$email) {
             $errors['email'] = 'Le champ email est requis';
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = 'Le champ email doit être un email valide';
         } elseif ($user->VerifyIfExist($email, 'email')) {
-            $errors['email'] = 'Le champ email est déjà utilisé';
+            $errors['email'] = 'Cette email est déjà utilisé';
+            $errors['useEmail'] = 'Cette email est déjà utilisé';
         }
         if (!$firstname) {
             $errors['firstname'] = 'Le champ firstname est requis';
@@ -119,23 +120,30 @@ class AuthController
         } elseif (strlen($password) < 8 || strlen($password) > 35) {
             $errors['password'] = 'Le champ password doit contenir entre 8 et 35 caractères';
         } elseif (!$this->VerifyPassword($password)) {
-            $errors['password'] = 'Le champ password doit contenir au moins 3 lettres minuscules, 2 lettres majuscules, 2 chiffres et 1 caractère spécial';
+            $errors['password'] = 'Le mot de passe doit contenir au moins 3 lettres minuscules, 2 lettres majuscules, 2 chiffres et 1 caractère spécial';
         }
         if (!$password_confirm) {
-            $errors['passwordConfirm'] = 'Le champ password_confirm est requis';
+            $errors['passwordConfirm'] = 'La confirmation du mot de passe est requis';
         } elseif ($password !== $password_confirm) {
-            $errors['passwordConfirm'] = 'Le champ password_confirm doit être identique au champ password';
+            $errors['passwordConfirm'] = 'Le deux mot de passe ne sont pas identiques';
         }
         if (empty($errors)) {
             if ($user->VerifyIfUsernameExist($username)) {
-                $errors['username'] = 'Le champ username est déjà utilisé -2';
+                $errors['useUsername'] = 'Ce nom d\'utlisateur est déjà utilisé';
             } elseif ($user->VerifyIfExist($email, 'email')) {
-                $errors['email'] = 'Le champ email est déjà utilisé';
+                $errors['useEmail'] = 'Cette email est déjà utilisé';
             } else {
+                // Nettoyer les données
+                $username = $this->ValidFieldForm($username);
+                $email = $this->ValidFieldForm($email);
+                $firstname = $this->ValidFieldForm($firstname);
+                $lastname = $this->ValidFieldForm($lastname);
+                $password = $this->ValidFieldForm($password);
                 $firstLetter = strtoupper(substr($firstname, 0, 1));
                 $backgroundColor = sprintf('#%06X', mt_rand(0, 0xFFFFFF));
                 $avatar = $this->generateAvatarImage($firstLetter, $backgroundColor, $username);
                 // Ajouter l'utilisateur dans la base de données
+
                 $user->register($username, $email, $firstname, $lastname, $password, $avatar);
                 $errors['success'] = 'Votre compte a bien été créé';
             }

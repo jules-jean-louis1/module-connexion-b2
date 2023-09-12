@@ -4,6 +4,7 @@ function addLabelOnFocus(inputElement, labelFor, labelText) {
         const labelElement = document.createElement('label');
         labelElement.setAttribute('for', labelFor);
         labelElement.textContent = labelText;
+        labelElement.setAttribute('class', 'absolute top-0 text-gray-500 text-sm font-light text-grey-500 transition-all duration-300 ease-in-out');
         inputElement.setAttribute('placeholder', '');
         const formControlDiv = this.parentElement;
         formControlDiv.insertBefore(labelElement, this);
@@ -155,6 +156,7 @@ export async function loginRegisterForm(btnLogin)
                     });
                     const data = await response.json();
 
+                    const errorDisplay = document.getElementById('errorDisplay');
                     if (data.email) {
                         showError('errorEmail', data.email);
                     }
@@ -172,6 +174,39 @@ export async function loginRegisterForm(btnLogin)
                     }
                     if (data.lastname) {
                         showError('errorLastname', data.lastname);
+                    }
+                    if (data.success) {
+                        errorDisplay.innerHTML = '';
+                        errorDisplay.innerHTML = `
+                        <div role="alert" class="flex p-3 border border-[#000000] border-l-4 flex-row border-l-[#FF0100] rounded-[16px] mt-6">
+                            <span class="block sm:inline">
+                                <svg width="1em" height="1em" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 pointer-events-none mr-2 text-theme-status-error"><defs><clipPath id="outlined_svg__a"><path fill="currentcolor" d="M11.541.514a4 4 0 011.4 1.317l.126.209 5.58 9.92a4 4 0 01-3.23 5.953l-.256.008H4a4 4 0 01-3.605-5.733l.119-.228 5.58-9.92A4 4 0 0111.541.514zM7.92 2.887l-.082.133-5.58 9.92a2 2 0 001.594 2.976L4 15.92h11.16a2 2 0 001.815-2.841l-.071-.14-5.58-9.92a2 2 0 00-3.405-.133zM9.58 11.92a1 1 0 110 2 1 1 0 010-2zm0-7a1 1 0 011 1v4a1 1 0 11-2 0v-4a1 1 0 011-1z"></path></clipPath></defs><g clip-path="url(#outlined_svg__a)" fill="currentcolor" transform="translate(2.42 3.079)"><path d="M0 0h19.161v17.921H0V0z"></path></g></svg>
+                            </span>
+                            <p class="flex-1 !mt-0 typo-callout mt-3">${data.success}</p>
+                        </div>`;
+                        setTimeout(() => {
+                            Register();
+                        }, 2000);
+                    }
+                    if (data.useUsername) {
+                        errorDisplay.innerHTML = '';
+                        errorDisplay.innerHTML = `
+                        <div role="alert" class="flex p-3 border border-[#000000] border-l-4 flex-row border-l-[#FF0100] rounded-[16px] mt-6">
+                            <span class="block sm:inline">
+                                <svg width="1em" height="1em" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 pointer-events-none mr-2 text-theme-status-error"><defs><clipPath id="outlined_svg__a"><path fill="currentcolor" d="M11.541.514a4 4 0 011.4 1.317l.126.209 5.58 9.92a4 4 0 01-3.23 5.953l-.256.008H4a4 4 0 01-3.605-5.733l.119-.228 5.58-9.92A4 4 0 0111.541.514zM7.92 2.887l-.082.133-5.58 9.92a2 2 0 001.594 2.976L4 15.92h11.16a2 2 0 001.815-2.841l-.071-.14-5.58-9.92a2 2 0 00-3.405-.133zM9.58 11.92a1 1 0 110 2 1 1 0 010-2zm0-7a1 1 0 011 1v4a1 1 0 11-2 0v-4a1 1 0 011-1z"></path></clipPath></defs><g clip-path="url(#outlined_svg__a)" fill="currentcolor" transform="translate(2.42 3.079)"><path d="M0 0h19.161v17.921H0V0z"></path></g></svg>
+                            </span>
+                            <p class="flex-1 !mt-0 typo-callout mt-3">${data.useUsername}</p>
+                        </div>`;
+                    }
+                    if (data.useEmail) {
+                        errorDisplay.innerHTML = '';
+                        errorDisplay.innerHTML = `
+                        <div role="alert" class="flex p-3 border border-[#000000] border-l-4 flex-row border-l-[#FF0100] rounded-[16px] mt-6">
+                            <span class="block sm:inline">
+                                <svg width="1em" height="1em" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 pointer-events-none mr-2 text-theme-status-error"><defs><clipPath id="outlined_svg__a"><path fill="currentcolor" d="M11.541.514a4 4 0 011.4 1.317l.126.209 5.58 9.92a4 4 0 01-3.23 5.953l-.256.008H4a4 4 0 01-3.605-5.733l.119-.228 5.58-9.92A4 4 0 0111.541.514zM7.92 2.887l-.082.133-5.58 9.92a2 2 0 001.594 2.976L4 15.92h11.16a2 2 0 001.815-2.841l-.071-.14-5.58-9.92a2 2 0 00-3.405-.133zM9.58 11.92a1 1 0 110 2 1 1 0 010-2zm0-7a1 1 0 011 1v4a1 1 0 11-2 0v-4a1 1 0 011-1z"></path></clipPath></defs><g clip-path="url(#outlined_svg__a)" fill="currentcolor" transform="translate(2.42 3.079)"><path d="M0 0h19.161v17.921H0V0z"></path></g></svg>
+                            </span>
+                            <p class="flex-1 !mt-0 typo-callout mt-3">${data.useEmail}</p>
+                        </div>`;
                     }
                     console.log(data);
                 } catch (error) {
