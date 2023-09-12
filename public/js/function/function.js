@@ -1,3 +1,28 @@
+/* Label Animation */
+function addLabelOnFocus(inputElement, labelFor, labelText) {
+    inputElement.addEventListener('focusin', function () {
+        const labelElement = document.createElement('label');
+        labelElement.setAttribute('for', labelFor);
+        labelElement.textContent = labelText;
+        inputElement.setAttribute('placeholder', '');
+        const formControlDiv = this.parentElement;
+        formControlDiv.insertBefore(labelElement, this);
+    });
+    // Ajoutez un gestionnaire d'événements pour le focusout sur l'input (pour le supprimer)
+    inputElement.addEventListener('focusout', function () {
+        const labelElement = this.parentElement.querySelector('label');
+
+        if (labelElement) {
+            labelElement.remove();
+            inputElement.setAttribute('placeholder', labelText);
+        }
+    });
+}
+/* Function error Handler */
+function showError(input, message){
+
+}
+
 /* Function to Create Dialog */
 
 function createDialog()
@@ -73,6 +98,11 @@ export async function loginRegisterForm(btnLogin)
             containerDiv.innerHTML = dataLogin;
             TextchangeLogin.textContent = "Vous n'avez pas de compte ?";
             buttonLogin.textContent = "S'inscrire";
+            // Animation Label
+            const inputLogin = document.querySelector('#email');
+            const inputPassword = document.querySelector('#password');
+            addLabelOnFocus(inputLogin, 'login', 'Nom d\'utilisateur / Email');
+            addLabelOnFocus(inputPassword, 'password', 'Mot de passe');
             const formLogin = document.querySelector('#login-form');
             formLogin.addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -97,7 +127,21 @@ export async function loginRegisterForm(btnLogin)
             containerDiv.innerHTML = dataRegister;
             TextchangeLogin.textContent = "Vous avez déjà un compte ?";
             buttonLogin.textContent = "Se connecter";
+            // Animation Label
+            const inputUsername = document.querySelector('#username');
+            const inputEmail = document.querySelector('#email');
+            const inputFirstname = document.querySelector('#firstname');
+            const inputLastname = document.querySelector('#lastname');
+            const inputPassword = document.querySelector('#password');
+            const inputPasswordConfirm = document.querySelector('#passwordConfirm');
             const formRegister = document.querySelector('#formRegister');
+            addLabelOnFocus(inputUsername, 'username', 'Nom d\'utilisateur');
+            addLabelOnFocus(inputEmail, 'email', 'Email');
+            addLabelOnFocus(inputFirstname, 'firstname', 'Prénom');
+            addLabelOnFocus(inputLastname, 'lastname', 'Nom');
+            addLabelOnFocus(inputPassword, 'password', 'Mot de passe');
+            addLabelOnFocus(inputPasswordConfirm, 'passwordConfirm', 'Confirmer le mot de passe');
+
             formRegister.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const formData = new FormData(formRegister);
