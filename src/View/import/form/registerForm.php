@@ -1,40 +1,51 @@
-<form action="" method="post" id="formRegister">
+<form action="" method="post" id="formRegister" class="bg-white h-full max-h-[calc(100vh-2.5rem)] mobileL:h-[40rem] mobileL:max-h-[calc(100vh-5rem)] w-[26.25rem] px-4 py-5 flex flex-col justify-between">
     <div>
-        <div class="form_control flex flex-col">
-            <input type="text" name="username" id="username" placeholder="Nom d'utilisateur">
-            <small id="errorUsername" class="h-4"></small>
+        <div>
+            <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
+                <input type="text" name="username" id="username" placeholder="Nom d'utilisateur" class="bg-transparent text-white focus:outline-none">
+            </div>
+            <small id="errorUsername"></small>
         </div>
-        <div class="form_control flex flex-col">
-            <input type="email" name="email" id="email" placeholder="Email">
-            <small id="errorEmail" class="h-4"></small>
+        <div>
+            <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
+                <input type="email" name="email" id="email" placeholder="Email" class="bg-transparent text-white focus:outline-none">
+            </div>
+            <small id="errorEmail"></small>
         </div>
     </div>
-    <div class="flex flex-col">
-        <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden bg-theme-float border border-transparent cursor-text">
-            <div class="flex flex-col flex-1 items-start max-w-full">
-                <input type="text" name="firstname" id="firstname" placeholder="Prénom" class="bg-transparent text-white focus:outline-none">
+    <div class="flex space-x-2">
+        <div class="flex-grow">
+            <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
+                <input type="text" name="firstname" id="firstname" placeholder="Prénom" class="bg-transparent text-white focus:outline-none w-full">
             </div>
-            <small id="errorFirstname" class="h-4"></small>
+            <small id="errorFirstname"></small>
         </div>
-        <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden bg-theme-float border border-transparent cursor-text">
-            <div class="flex flex-col flex-1 items-start max-w-full">
-                <input type="text" name="lastname" id="lastname" placeholder="Nom" class="bg-transparent text-white focus:outline-none">
+        <div class="flex-grow">
+            <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
+                <input type="text" name="lastname" id="lastname" placeholder="Nom" class="bg-transparent text-white focus:outline-none w-full">
             </div>
-            <small id="errorLastname" class="h-4"></small>
+            <small id="errorLastname"></small>
         </div>
     </div>
+
     <div>
-        <div class="form_control flex flex-col">
-            <input type="password" name="password" id="password" placeholder="Mot de passe">
-            <small id="errorPassword" class="h-4"></small>
+        <div>
+            <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
+                <input type="password" name="password" id="password" placeholder="Mot de passe" class="bg-transparent text-white focus:outline-none">
+            </div>
+            <small id="errorPassword"></small>
         </div>
-        <div class="form_control flex flex-col">
-            <input type="password" name="passwordConfirm" id="passwordConfirm" placeholder="Confirmer le mot de passe">
-            <small id="errorPasswordConfirm" class="h-4"></small>
+        <div>
+            <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
+                <input type="password" name="passwordConfirm" id="passwordConfirm" placeholder="Confirmer le mot de passe" class="bg-transparent text-white focus:outline-none">
+            </div>
+            <small id="errorPasswordConfirm"></small>
         </div>
     </div>
     <div>
         <div id="errorDisplay" class="h-20"></div>
     </div>
-    <button type="submit" class="p-2 bg-amber-400">Register</button>
+    <button type="submit" class="p-2 bg-amber-400 rounded">
+        Créer un compte
+    </button>
 </form>

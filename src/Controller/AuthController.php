@@ -89,7 +89,7 @@ class AuthController
         $user = new AuthModel();
 
         if (!$username){
-            $errors['username'] = 'Le champ username est requis';
+            $errors['username'] = 'Veuillez indiquer votre Nom d\'utilisateur';
         } elseif (!$this->ValidUsername($username)) {
             $errors['username'] = 'Le champ username doit contenir entre 3 et 20 caractères et ne doit pas contenir de caractères spéciaux';
         } elseif ($user->VerifyIfUsernameExist($username)) {
@@ -97,20 +97,20 @@ class AuthController
             $errors['useUsername'] = 'Ce nom d\'utlisateur est déjà utilisé';
         }
         if (!$email) {
-            $errors['email'] = 'Le champ email est requis';
+            $errors['email'] = 'Veuillez indiquer votre adresse e-mail.';
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors['email'] = 'Le champ email doit être un email valide';
+            $errors['email'] = 'Veuillez indiquer votre adresse e-mail valide.';
         } elseif ($user->VerifyIfExist($email, 'email')) {
             $errors['email'] = 'Cette email est déjà utilisé';
             $errors['useEmail'] = 'Cette email est déjà utilisé';
         }
         if (!$firstname) {
-            $errors['firstname'] = 'Le champ firstname est requis';
+            $errors['firstname'] = 'Entrez votre prénom';
         } elseif (strlen($firstname) <= 2 || strlen($firstname) >= 20) {
             $errors['firstname'] = 'Le champ firstname doit contenir entre 3 et 20 caractères';
         }
         if (!$lastname) {
-            $errors['lastname'] = 'Le champ lastname est requis';
+            $errors['lastname'] = 'Entrez votre nom';
         } elseif (strlen($lastname) <= 2 || strlen($lastname) >= 20) {
             $errors['lastname'] = 'Le champ lastname doit contenir entre 3 et 20 caractères';
         }

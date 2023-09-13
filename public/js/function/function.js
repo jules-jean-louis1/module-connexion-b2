@@ -38,7 +38,7 @@ function addLabelOnFocus(inputElement, labelFor, labelText) {
 /* Function error Handler */
 function showError(smallSelector, message){
     const small = document.getElementById(smallSelector);
-    small.setAttribute("class", "text-red-500 text-sm font-bold")
+    small.setAttribute("class", "text-red-500 text-sm")
     small.innerHTML = '';
     small.textContent = message;
 }
@@ -50,21 +50,21 @@ function createDialog()
     const containerForm = document.querySelector('#containerFormLoginRegister');
     const dialog = document.createElement("dialog");
     dialog.setAttribute("id", "dialog");
-    dialog.setAttribute("class", "w-[26.25rem] h-[55%] bg-[#202225] border-[1px] border-[#a8b3cf33] rounded-[14px] shadow-lg z-50");
+    dialog.setAttribute("class", "w-[28.25rem] h-[62%] bg-white border-[1px] border-[#a8b3cf33] rounded-[14px] shadow-lg z-50");
     dialog.innerHTML = '';
 
     const divBottom = document.createElement("div");
     divBottom.setAttribute("id", "divBottom");
-    divBottom.setAttribute("class", "w-full flex items-center justify-center bg-[#202225] border-t-[1px] border-t-[#a8b3cf33] text-white rounded-b-[14px]");
+    divBottom.setAttribute("class", "w-full flex items-center justify-center bg-white border-t-[1px] bottom-0 border-t-[#a8b3cf33] text-black rounded-b-[14px] fixed");
     divBottom.innerHTML = `
             <div class="w-full flex items-center justify-center">
                 <p class="text-sm" id="TextchangeLogin">Vous n'avez pas de compte ?</p>
-                <button type="button" id="buttonLogin" class="p-4 bg-red rounded-lg">S'inscrire</button>
+                <button type="button" id="buttonLogin" class="p-4 rounded-lg underline font-bold">S'inscrire</button>
             </div>
         `;
     const Div = document.createElement("div");
     Div.setAttribute("id", "DivModifyText");
-    Div.setAttribute("class", "py-2 px-4 w-full flex items-center justify-between bg-[#202225] border-b-[1px] border-b-[#a8b3cf33] text-white font-semibold text-lg rounded-t-[14px]");
+    Div.setAttribute("class", "py-2 px-4 w-full flex items-center justify-between bg-white border-b-[1px] border-b-[#a8b3cf33] text-black font-semibold text-lg rounded-t-[14px]");
     const Para = document.createElement("p")
     Para.setAttribute("id", "ParaModifyText");
     Para.textContent = "Se connecter à votre compte";
@@ -82,7 +82,7 @@ function createDialog()
 
     const containerDiv = document.createElement("div");
     containerDiv.setAttribute("id", "containerDiv");
-    containerDiv.setAttribute("class", "flex justify-center w-full h-[78%]");
+    containerDiv.setAttribute("class", "flex justify-center w-full h-[85%]");
 
     dialog.appendChild(Div);
     Div.appendChild(Para);
@@ -100,6 +100,7 @@ function createDialog()
 export async function loginRegisterForm(btnLogin)
 {
     const containerForm = document.querySelector('#containerFormLoginRegister');
+    const dialogModal_Overlay = document.querySelector('#dialogModal_Overlay');
     containerForm.innerHTML = '';
     createDialog();
 
@@ -110,6 +111,7 @@ export async function loginRegisterForm(btnLogin)
         const buttonLogin = document.querySelector('#buttonLogin');
         const ParaModifyText = document.getElementById("ParaModifyText");
         const TextchangeLogin = document.getElementById("TextchangeLogin");
+        dialogModal_Overlay.classList.add('dialogModal_Overlay');
         /* Récupere le formulaire de connexion */
         async function Login() {
             const responseLogin = await fetch(`${window.location.origin}/moduleconnexionb2/login`);
@@ -276,6 +278,7 @@ export async function loginRegisterForm(btnLogin)
         const buttonClose = document.querySelector('#buttonClose');
         buttonClose.addEventListener('click', () => {
             dialog.close();
+            dialogModal_Overlay.classList.remove('dialogModal_Overlay');
         });
     });
 }

@@ -24,6 +24,16 @@
     font-weight: bold;
     font-style: italic;
 }
-.border {
-
+.dialogModal_Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+    z-index: 30;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+#errorUsername, #errorEmail, #errorFirstname, #errorLastname, #errorPassword, #errorPasswordConfirm {
+    display: inline-block;
+    height: 1rem;
 }
