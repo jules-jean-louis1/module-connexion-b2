@@ -22,6 +22,7 @@ class UserController extends AbstractClasses\AbstractUserController
         $userModel = new UserModel();
 
         $errors = [];
+        $success = [];
         $username = $this->verifyField('username');
         $email = $this->verifyField('email');
         $firstname = $this->verifyField('firstname');
@@ -111,44 +112,44 @@ class UserController extends AbstractClasses\AbstractUserController
         }
         if (!empty($errors)) {
             echo json_encode($errors);
-        } 
+        }
 
         if (empty($errors)) {
             if ($crtl_username !== null) {
                 $userModel->editInfoUser('username', $crtl_username, $id);
                 $_SESSION['user']['username'] = $crtl_username;
-                $errors['username'] = 'Votre nom d\'utilisateur a bien été modifié';
+                $success['username'] = 'Votre nom d\'utilisateur a bien été modifié';
             }
             if ($crtl_email !== null) {
                 $userModel->editInfoUser('email', $crtl_email, $id);
                 $_SESSION['user']['email'] = $crtl_email;
-                $errors['email'] = 'Votre adresse e-mail a bien été modifiée';
+                $success['email'] = 'Votre adresse e-mail a bien été modifiée';
             }
             if ($crtl_firstname !== null) {
                 $userModel->editInfoUser('firstname', $crtl_firstname, $id);
                 $_SESSION['user']['firstname'] = $crtl_firstname;
-                $errors['firstname'] = 'Votre prénom a bien été modifié';
+                $success['firstname'] = 'Votre prénom a bien été modifié';
             }
             if ($crtl_lastname !== null) {
                 $userModel->editInfoUser('lastname', $crtl_lastname, $id);
                 $_SESSION['user']['lastname'] = $crtl_lastname;
-                $errors['lastname'] = 'Votre nom a bien été modifié';
+                $success['lastname'] = 'Votre nom a bien été modifié';
             }
             if ($crtl_bio !== null) {
                 $userModel->editInfoUser('bio', $crtl_bio, $id);
                 $_SESSION['user']['bio'] = $crtl_bio;
-                $errors['bio'] = 'Votre biographie a bien été modifiée';
+                $success['bio'] = 'Votre biographie a bien été modifiée';
             }
             if (!empty($password) && !empty($passwordConfirm)) {
                 if ($userModel->VerifyPassword($password, $id)) {
                     $password = password_hash($password, PASSWORD_DEFAULT);
                     $userModel->editInfoUser('password', $password, $id);
-                    $errors['password'] = 'Votre mot de passe a bien été modifié';
+                    $success['password'] = 'Votre mot de passe a bien été modifié';
                 } else {
-                    $errors['password'] = 'Votre mot de passe est incorrect';
+                    $success['error_password'] = 'Votre mot de passe n\'a pas été modifié';
                 }
             }
-            echo json_encode($errors);
+            echo json_encode($success);
         }
     }
     private function editUser($crtl, $field, $id)
