@@ -4,11 +4,13 @@ require 'vendor/autoload.php';
 
 use App\Controller\{
     AuthController,
-    UserController
+    UserController,
+    AdminController
 };  
 
 $authController = new AuthController();
 $userController = new UserController();
+$adminController = new AdminController();
 
 $router = new AltoRouter();
 $router->setBasePath('/moduleconnexionb2');
@@ -35,6 +37,9 @@ $router->map( 'GET', '/contact', function() {
 // map admin page
 $router->map( 'GET', '/admin', function() {
     require 'src/View/admin.php';
+});
+$router->map('GET', '/admin/users', function () use ($adminController) {
+    $adminController->getAllUsers();
 });
 
 /* Form Auth */

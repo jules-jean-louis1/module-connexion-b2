@@ -44,6 +44,13 @@
                                     Déconnexion
                                 </a>
                             </li>
+                            <?php if ($_SESSION['user']['role'] === 'admin') : ?>
+                                <li>
+                                    <a href="<?='http://'.$_SERVER['HTTP_HOST'].'/moduleconnexionb2/admin'; ?>">
+                                        Admin
+                                    </a>
+                                </li>
+                            <?php endif; ?>
                         </ul>
                     </div>
                 <div>
