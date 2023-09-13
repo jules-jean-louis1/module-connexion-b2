@@ -89,7 +89,7 @@ class AuthController
         $user = new AuthModel();
 
         if (!$username){
-            $errors['username'] = 'Veuillez indiquer votre Nom d\'utilisateur';
+            $errors['username'] = 'Veuillez indiquer votre Nom d\'utilisateur.';
         } elseif (!$this->ValidUsername($username)) {
             $errors['username'] = 'Le champ username doit contenir entre 3 et 20 caractères et ne doit pas contenir de caractères spéciaux';
         } elseif ($user->VerifyIfUsernameExist($username)) {
@@ -101,28 +101,28 @@ class AuthController
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = 'Veuillez indiquer votre adresse e-mail valide.';
         } elseif ($user->VerifyIfExist($email, 'email')) {
-            $errors['email'] = 'Cette email est déjà utilisé';
-            $errors['useEmail'] = 'Cette email est déjà utilisé';
+            $errors['email'] = 'Cette email est déjà utilisé.';
+            $errors['useEmail'] = 'Cette email est déjà utilisé.';
         }
         if (!$firstname) {
-            $errors['firstname'] = 'Entrez votre prénom';
+            $errors['firstname'] = 'Entrez votre prénom.';
         } elseif (strlen($firstname) <= 2 || strlen($firstname) >= 20) {
-            $errors['firstname'] = 'Le champ firstname doit contenir entre 3 et 20 caractères';
+            $errors['firstname'] = 'Votre prénom doit contenir entre 3 et 20 caractères.';
         }
         if (!$lastname) {
             $errors['lastname'] = 'Entrez votre nom';
         } elseif (strlen($lastname) <= 2 || strlen($lastname) >= 20) {
-            $errors['lastname'] = 'Le champ lastname doit contenir entre 3 et 20 caractères';
+            $errors['lastname'] = 'Votre nom doit contenir entre 3 et 20 caractères';
         }
         if (!$password) {
-            $errors['password'] = 'Le champ password est requis';
+            $errors['password'] = 'Veuillez indiquer votre mot de passe.';
         } elseif (strlen($password) <= 8 || strlen($password) >= 35) {
-            $errors['password'] = 'Le champ password doit contenir entre 8 et 35 caractères';
+            $errors['password'] = 'Votre mot de passe doit contenir entre 8 et 35 caractères';
         } elseif (!$this->VerifyPassword($password)) {
-            $errors['password'] = 'Le mot de passe doit contenir au moins 3 lettres minuscules, 2 lettres majuscules, 2 chiffres et 1 caractère spécial';
+            $errors['password'] = 'Votre mot de passe doit contenir au moins 3 lettres minuscules, 2 lettres majuscules, 2 chiffres et 1 caractère spécial';
         }
         if (!$password_confirm) {
-            $errors['passwordConfirm'] = 'La confirmation du mot de passe est requis';
+            $errors['passwordConfirm'] = 'Veuillez confirmer votre mot de passe.';
         } elseif ($password !== $password_confirm) {
             $errors['passwordConfirm'] = 'Le deux mot de passe ne sont pas identiques';
         }
