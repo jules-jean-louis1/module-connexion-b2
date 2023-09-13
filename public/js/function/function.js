@@ -15,7 +15,7 @@ export function handleMenu() {
 }
 
 /* Label Animation */
-function addLabelOnFocus(inputElement, labelFor, labelText) {
+export function addLabelOnFocus(inputElement, labelFor, labelText) {
     inputElement.addEventListener('focusin', function () {
         const labelElement = document.createElement('label');
         labelElement.setAttribute('for', labelFor);
@@ -36,7 +36,7 @@ function addLabelOnFocus(inputElement, labelFor, labelText) {
     });
 }
 /* Function error Handler */
-function showError(smallSelector, message){
+export function showError(smallSelector, message){
     const small = document.getElementById(smallSelector);
     small.setAttribute("class", "text-red-500 text-sm")
     small.innerHTML = '';

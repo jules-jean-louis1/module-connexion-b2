@@ -15,6 +15,8 @@ const password = document.querySelector('#password');
 const passwordConfirm = document.querySelector('#passwordConfirm');
 const bio = document.querySelector('#bio');
 
+const editProfil = document.querySelector('#editProfil');
+
 // Get informations from the user
 
 // Obtenez l'URL actuelle
@@ -39,3 +41,17 @@ function displayUserInfo() {
 }
 
 displayUserInfo();
+
+// Update user informations
+editProfil.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    try {
+        const response = await fetch(`${window.location.origin}/moduleconnexionb2/profil/${id}/edit`, {
+            method: 'POST',
+            body: new FormData(editProfil)})
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.log(error);
+    }
+});

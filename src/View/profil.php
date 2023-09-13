@@ -19,14 +19,67 @@
     <div id="dialogModal_Overlay"></div>
     <h1>Profil</h1>
     <section>
-        <form action="" method="post">
-            <input name="username" id="username">
-            <input name="email" id="email">
-            <input name="firstname" id="firstname">
-            <input name="lastname" id="lastname">
-            <input name="password" id="password">
-            <input name="passwordConfirm" id="passwordConfirm">
-            <textarea name="bio" id="bio"></textarea>
+        <form action="" method="post" id="editProfil">
+            <div>
+                <div>
+                    <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
+                        <input type="text" name="username" id="username" class="bg-transparent text-black focus:outline-none">
+                    </div>
+                    <small id="errorUsername"></small>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
+                        <input name="email" id="email" class="bg-transparent text-black focus:outline-none">
+                    </div>
+                    <small id="errorEmail"></small>
+                </div>
+            </div>
+            <div class="flex space-x-2">
+                <div>
+                    <div>
+                        <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
+                            <input name="firstname" id="firstname" class="bg-transparent text-black focus:outline-none">
+                        </div>
+                        <small id="errorFirstname"></small>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
+                            <input name="lastname" id="lastname" class="bg-transparent text-black focus:outline-none">
+                        </div>
+                        <small id="errorLastname"></small>
+                    </div>
+                </div>
+            </div>
+            <div class="flex space-x-2">
+                <div>
+                    <div>
+                        <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
+                            <input name="password" id="password" class="bg-transparent text-black focus:outline-none">
+                        </div>
+                        <small id="errorPassword"></small>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
+                            <input name="passwordConfirm" id="passwordConfirm" class="bg-transparent text-black focus:outline-none">
+                        </div>
+                        <small id="errorPasswordConfirm"></small>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
+                        <textarea name="bio" id="bio" class="bg-transparent text-black focus:outline-none"></textarea>
+                    </div>
+                    <small id="errorBio"></small>
+                </div>
+            </div>
             <button type="submit">Modifier</button>
         </form>
     </section>

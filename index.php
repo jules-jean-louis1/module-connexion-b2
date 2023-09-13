@@ -25,6 +25,9 @@ $router->map( 'GET', '/profil/[i:id]', function( $id ) {
 $router->map('GET', '/profil/[i:id]/info', function ($id) use ($userController) {
     $userController->getUserInfo($id);
 });
+$router->map('POST', '/profil/[i:id]/edit', function ($id) use ($userController) {
+    $userController->editUserInfo($id);
+});
 $router->map( 'GET', '/contact', function() {
     require 'src/View/contact.php';
 });
