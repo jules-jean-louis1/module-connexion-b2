@@ -32,6 +32,10 @@ $router->map( 'GET', '/contact', function() {
     require 'src/View/contact.php';
 });
 
+// map admin page
+$router->map( 'GET', '/admin', function() {
+    require 'src/View/admin.php';
+});
 
 /* Form Auth */
 $router->map('GET', '/login', function () {
