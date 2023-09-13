@@ -2,16 +2,8 @@
 
 namespace App\Controller;
 use App\Model\UserModel;
-class UserController
+class UserController extends AbstractClasses\AbstractUserController
 {
-    public function verifyField($field)
-    {
-        if (isset($_POST[$field]) && !empty(trim($_POST[$field]))) {
-            return $_POST[$field];
-        } else {
-            return false;
-        }
-    }
     public function getUserInfo(int $id): void
     {
         $userModel = new UserModel();
@@ -45,41 +37,68 @@ class UserController
         $crtl_lastname = null;
         $crtl_bio = null;
 
-        if (!$username) {
-            $errors['username'] = 'Veuillez indiquer votre Nom d\'utilisateur.';
-        } elseif ($username <=3 || $username >= 20) {
-            $errors['username'] = 'Votre nom d\'utilisateur doit contenir entre 3 et 20 caractères';
-        } elseif ($_POST['username'] !== $_SESSION['user']['username']) {
-            $crtl_username = $_POST['username'];
+        if ($_POST['username'] !== $_SESSION['user']['username']) {
+            if (!$username) {
+                $errors['username'] = 'Veuillez renseigner un nom d\'utilisateur';
+            } elseif (strlen($username) <= 2 || strlen($username) >= 20) {
+                $errors['username'] = 'Votre nom d\'utilisateur doit contenir entre 3 et 20 caractères';
+            } elseif ($userModel->VerifyIfExist($username, 'username')) {
+                $errors['username'] = 'Ce nom d\'utilisateur est déjà utilisé';
+            } else {
+                $crtl_username = $_POST['username'];
+            }
         }
-        if (!$email) {
-            $errors['email'] = 'Veuillez indiquer votre adresse e-mail.';
-        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors['email'] = 'Veuillez indiquer votre adresse e-mail valide.';
-        } elseif ($_POST['email'] !== $_SESSION['user']['email']) {
-            $crtl_email = $_POST['email'];
+        if ($_POST['email'] !== $_SESSION['user']['email']) {
+            if (!$email) {
+                $errors['email'] = 'Veuillez renseigner une adresse e-mail';
+            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $errors['email'] = 'Veuillez renseigner une adresse e-mail valide';
+            } elseif ($userModel->VerifyIfExist($email, 'email')) {
+                $errors['email'] = 'Cette adresse e-mail est déjà utilisée';
+            } else {
+                $crtl_email = $_POST['email'];
+            }
         }
-        if (!$firstname) {
-            $errors['firstname'] = 'Entrez votre prénom.';
-        } elseif (strlen($firstname) <= 2 || strlen($firstname) >= 20) {
-            $errors['firstname'] = 'Votre prénom doit contenir entre 3 et 20 caractères.';
-        } elseif ($_POST['firstname'] !== $_SESSION['user']['firstname']) {
-            $crtl_firstname = $_POST['firstname'];
+        if ($_POST['firstname'] !== $_SESSION['user']['firstname']) {
+            if (!$firstname) {
+                $errors['firstname'] = 'Veuillez renseigner votre prénom';
+            } elseif (strlen($firstname) <= 2 || strlen($firstname) >= 20) {
+                $errors['firstname'] = 'Votre prénom doit contenir entre 3 et 20 caractères';
+            } else {
+                $crtl_firstname = $_POST['firstname'];
+            }
         }
-        if (!$lastname) {
-            $errors['lastname'] = 'Entrez votre nom';
-        } elseif (strlen($lastname) <= 2 || strlen($lastname) >= 20) {
-            $errors['lastname'] = 'Votre nom doit contenir entre 3 et 20 caractères';
-        } elseif ($_POST['lastname'] !== $_SESSION['user']['lastname']) {
-            $crtl_lastname = $_POST['lastname'];
+        if ($_POST['lastname'] !== $_SESSION['user']['lastname']) {
+            if (!$lastname) {
+                $errors['lastname'] = 'Veuillez renseigner votre nom';
+            } elseif (strlen($lastname) <= 2 || strlen($lastname) >= 20) {
+                $errors['lastname'] = 'Votre nom doit contenir entre 3 et 20 caractères';
+            } else {
+                $crtl_lastname = $_POST['lastname'];
+            }
         }
-        if (!$bio) {
-            $errors['bio'] = 'Veuillez indiquer votre biographie.';
-        } elseif (strlen($bio) <= 2 || strlen($bio) >= 355) {
-            $errors['bio'] = 'Votre biographie doit contenir entre 3 et 255 caractères';
-        } elseif ($_POST['bio'] !== $_SESSION['user']['bio']) {
-            $crtl_bio = $_POST['bio'];
+        if ($_POST['bio'] !== $_SESSION['user']['bio']) {
+            if (!$bio) {
+                $errors['bio'] = 'Veuillez renseigner votre biographie';
+            } elseif (strlen($bio) >= 300) {
+                $errors['bio'] = 'Votre biographie ne doit pas dépasser les 300 caractères';
+            } else {
+                $crtl_bio = $_POST['bio'];
+            }
         }
-
+        if (!empty($password) || !empty($passwordConfirm)) {
+            if (!$password) {
+                $errors['password'] = 'Veuillez renseigner votre mot de passe';
+            } elseif (strlen($password) <= 8 || strlen($password) >= 35) {
+                $errors['password'] = 'Votre mot de passe doit contenir entre 8 et 35 caractères';
+            } elseif (!$this->VerifyPassword($password)) {
+                $errors['password'] = 'Votre mot de passe doit contenir au moins 3 lettres minuscules, 2 lettres majuscules, 2 chiffres et 1 caractère spécial';
+            }
+            if (!$passwordConfirm) {
+                $errors['passwordConfirm'] = 'Veuillez confirmer votre mot de passe';
+            } elseif ($password !== $passwordConfirm) {
+                $errors['passwordConfirm'] = 'Les deux mots de passe ne sont pas identiques';
+            }
+        }
     }
 }
