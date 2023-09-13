@@ -61,22 +61,22 @@ class UserModel extends AbstractDatabase
     {
         $bdd = $this->getBdd();
         $sql = 'SELECT id, username, email, firstname, lastname, role, created_at, updated_at FROM users';
-        if ($username !== '') {
+        if ($username !== 'default') {
             $sql .= 'ORDER BY username ' . $username;
         }
-        if ($firstname !== '') {
+        if ($firstname !== 'default') {
             $sql .= 'ORDER BY firstname ' . $firstname;
         }
-        if ($lastname !== '') {
+        if ($lastname !== 'default') {
             $sql .= 'ORDER BY lastname ' . $lastname;
         }
-        if ($role !== '') {
+        if ($role !== 'default') {
             $sql .= 'ORDER BY role ' . $role;
         }
-        if ($created_at !== '') {
+        if ($created_at !== 'default') {
             $sql .= 'ORDER BY created_at ' . $created_at;
         }
-        if ($updated_at !== '') {
+        if ($updated_at !== 'default') {
             $sql .= 'ORDER BY updated_at ' . $updated_at;
         }
         $req = $bdd->prepare($sql);

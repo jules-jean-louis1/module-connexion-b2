@@ -24,7 +24,7 @@ let orderUpdatedAt = 'asc';
 btnUsername.addEventListener('click', function () {
     orderUsername = orderUsername === 'asc' ? 'desc' : 'asc';
     btnUsername.value = orderUsername;
-    return orderUsername;
+    displayUsers();
 });
 btnEmail.addEventListener('click', function () {
     orderEmail = orderEmail === 'asc' ? 'desc' : 'asc';
@@ -66,64 +66,76 @@ let createdAtValue = btnCreatedAt.value;
 let updatedAtValue = btnUpdatedAt.value;
 
 async function displayUsers() {
-    /*if (usernameValue !== '') {
-        emailValue = '';
-        firstnameValue = '';
-        lastnameValue = '';
-        roleValue = '';
-        createdAtValue = '';
-        updatedAtValue = '';
+    if (usernameValue !== 'default') {
+        emailValue = 'default';
+        firstnameValue = 'default';
+        lastnameValue = 'default';
+        roleValue = 'default';
+        createdAtValue = 'default';
+        updatedAtValue = 'default';
     }
-    if (firstnameValue !== '') {
-        usernameValue = '';
-        emailValue = '';
-        lastnameValue = '';
-        roleValue = '';
-        createdAtValue = '';
-        updatedAtValue = '';
+    if (emailValue !== 'default') {
+        usernameValue = 'default';
+        firstnameValue = 'default';
+        lastnameValue = 'default';
+        roleValue = 'default';
+        createdAtValue = 'default';
+        updatedAtValue = 'default';
     }
-    if (lastnameValue !== '') {
-        usernameValue = '';
-        emailValue = '';
-        firstnameValue = '';
-        roleValue = '';
-        createdAtValue = '';
-        updatedAtValue = '';
+    if (firstnameValue !== 'default') {
+        usernameValue = 'default';
+        emailValue = 'default';
+        lastnameValue = 'default';
+        roleValue = 'default';
+        createdAtValue = 'default';
+        updatedAtValue = 'default';
     }
-    if (roleValue !== '') {
-        usernameValue = '';
-        emailValue = '';
-        firstnameValue = '';
-        lastnameValue = '';
-        createdAtValue = '';
-        updatedAtValue = '';
+    if (lastnameValue !== 'default') {
+        usernameValue = 'default';
+        emailValue = 'default';
+        firstnameValue = 'default';
+        roleValue = 'default';
+        createdAtValue = 'default';
+        updatedAtValue = 'default';
     }
-    if (createdAtValue !== '') {
-        usernameValue = '';
-        emailValue = '';
-        firstnameValue = '';
-        lastnameValue = '';
-        roleValue = '';
-        updatedAtValue = '';
+    if (roleValue !== 'default') {
+        usernameValue = 'default';
+        emailValue = 'default';
+        firstnameValue = 'default';
+        lastnameValue = 'default';
+        createdAtValue = 'default';
+        updatedAtValue = 'default';
     }
-    if (updatedAtValue !== '') {
-        usernameValue = '';
-        emailValue = '';
-        firstnameValue = '';
-        lastnameValue = '';
-        roleValue = '';
-        createdAtValue = '';
-    }*/
-    /*usernameValue = 'asc';
-    emailValue = 'asc';
-    firstnameValue = 'asc';
-    lastnameValue = 'asc';
-    roleValue = 'asc';
-    createdAtValue = 'asc';
-    updatedAtValue = 'asc';*/
+    if (createdAtValue !== 'default') {
+        usernameValue = 'default';
+        emailValue = 'default';
+        firstnameValue = 'default';
+        lastnameValue = 'default';
+        roleValue = 'default';
+        updatedAtValue = 'default';
+    }
+    if (updatedAtValue !== 'default') {
+        usernameValue = 'default';
+        emailValue = 'default';
+        firstnameValue = 'default';
+        lastnameValue = 'default';
+        roleValue = 'default';
+        createdAtValue = 'default';
+    }
+
 
     const response = await fetch(`${window.location.origin}/moduleconnexionb2/admin/users/${usernameValue}/${firstnameValue}/${lastnameValue}/${roleValue}/${createdAtValue}/${updatedAtValue}`);
     const data = await response.json();
     console.log(data);
+}
+function resetValues(currentButton) {
+    const buttons = [btnUsername, btnEmail, btnFirstname, btnLastname, btnRole, btnCreatedAt, btnUpdatedAt];
+
+    // Réinitialiser toutes les valeurs à "default" sauf celle du bouton actuel
+    buttons.forEach((button) => {
+        if (button !== currentButton) {
+            button.value = 'default';
+        }
+    });
 }
 displayUsers();
