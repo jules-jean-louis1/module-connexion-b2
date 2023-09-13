@@ -35,7 +35,9 @@
                     <div id="containerActionUser" class="absolute right-0 w-36 bg-gray-400 rounded border-[1px] border-[#a8b3cf33] shadow-lg z-10 hidden text-white">
                         <ul class="flex flex-col justify-around h-full">
                             <li>
-                                <a href="profil.php">Profil</a>
+                                <a href="<?='http://'.$_SERVER['HTTP_HOST'].'/moduleconnexionb2/profil/'.$_SESSION['user']['id']; ?>">
+                                    Profil
+                                </a>
                             </li>
                             <li>
                                 <a href="<?='http://'.$_SERVER['HTTP_HOST'].'/moduleconnexionb2/logout'; ?>">

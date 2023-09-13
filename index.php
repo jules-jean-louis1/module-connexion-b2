@@ -3,10 +3,12 @@ session_start();
 require 'vendor/autoload.php';
 
 use App\Controller\{
-    AuthController
+    AuthController,
+    UserController
 };  
 
 $authController = new AuthController();
+$userController = new UserController();
 
 $router = new AltoRouter();
 $router->setBasePath('/moduleconnexionb2');
@@ -20,9 +22,13 @@ $router->map( 'GET', '/', function() {
 $router->map( 'GET', '/profil/[i:id]', function( $id ) {
     require 'src/View/profil.php';
 });
+$router->map('GET', '/profil/[i:id]/info', function ($id) use ($userController) {
+    $userController->getUserInfo($id);
+});
 $router->map( 'GET', '/contact', function() {
     require 'src/View/contact.php';
 });
+
 
 /* Form Auth */
 $router->map('GET', '/login', function () {
