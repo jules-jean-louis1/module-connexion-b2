@@ -38,8 +38,8 @@ $router->map( 'GET', '/contact', function() {
 $router->map( 'GET', '/admin', function() {
     require 'src/View/admin.php';
 });
-$router->map('GET', '/admin/users', function () use ($adminController) {
-    $adminController->getAllUsers();
+$router->map('GET', '/admin/users/[a:username]/[a:firstname]/[a:lastname]/[a:role]/[a:createdAt]/[a:updatedAt]', function ($username, $firstname, $lastname, $role, $createdAt, $updatedAt) use ($adminController) {
+    $adminController->getAllUsers($username, $firstname, $lastname, $role, $createdAt, $updatedAt);
 });
 
 /* Form Auth */

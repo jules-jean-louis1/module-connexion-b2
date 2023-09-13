@@ -28,42 +28,42 @@
             <table>
                 <thead>
                     <th>
-                        <button type="button" value="" name="id" id="btnId">
+                        <button type="button" value="default" name="id" id="btnId">
                             ID
                         </button>
                     </th>
                     <th>
-                        <button type="button" value="" name="username" id="btnUsername">
+                        <button type="button" value="default" name="username" id="btnUsername">
                             Nom d'utilisateur
                         </button>
                     </th>
                     <th>
-                        <button type="button" value="" name="email" id="btnEmail">
+                        <button type="button" value="default" name="email" id="btnEmail">
                             Email
                         </button>
                     </th>
                     <th>
-                        <button type="button" value="" name="firstname" id="btnFirstname">
+                        <button type="button" value="default" name="firstname" id="btnFirstname">
                             Prénom
                         </button>
                     </th>
                     <th>
-                        <button type="button" value="" name="lastname" id="btnLastname">
+                        <button type="button" value="default" name="lastname" id="btnLastname">
                             Nom
                         </button>
                     </th>
                     <th>
-                        <button type="button" value="" name="role" id="btnRole">
+                        <button type="button" value="default" name="role" id="btnRole">
                             Rôle
                         </button>
                     </th>
                     <th>
-                        <button type="button" value="" name="created_at" id="btnCreated_at">
+                        <button type="button" value="default" name="created_at" id="btnCreatedAt">
                             Créer
                         </button>
                     </th>
                     <th>
-                        <button type="button" value="" name="updated_at" id="btnUpdated_at">
+                        <button type="button" value="default" name="updated_at" id="btnUpdatedAt">
                             Modifier
                         </button>
                     </th>
