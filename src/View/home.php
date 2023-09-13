@@ -1,6 +1,3 @@
-<?php
-var_dump($_SESSION);
-?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -10,6 +7,7 @@ var_dump($_SESSION);
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script defer type="module" src="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/moduleconnexionb2/public/js/home.js';?>"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/moduleconnexionb2/public/css/home.css';?>">
     <title>Home</title>
 </head>
 <body>
@@ -18,6 +16,7 @@ var_dump($_SESSION);
     </header>
     <main>
         <div id="containerFormLoginRegister"></div>
+        <div id="dialogModal_Overlay"></div>
         <h1>Home</h1>
     </main>
     <footer>

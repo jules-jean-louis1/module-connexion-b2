@@ -1,3 +1,19 @@
+/* Handle the display of the menu */
+export function handleMenu() {
+    const menu = document.querySelector('#btnActionUser');
+    const container = document.querySelector('#containerActionUser');
+
+    menu.addEventListener('click', () => {
+        container.classList.toggle('hidden');
+    });
+    document.addEventListener('click', (e) => {
+        const target = e.target;
+        if (!container.contains(target) && !menu.contains(target)) {
+            container.classList.add('hidden');
+        }
+    });
+}
+
 /* Label Animation */
 function addLabelOnFocus(inputElement, labelFor, labelText) {
     inputElement.addEventListener('focusin', function () {
