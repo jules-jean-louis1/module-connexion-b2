@@ -4,7 +4,7 @@ namespace App\Controller\AbstractClasses;
 
 class AbstractUserController
 {
-    protected function verifyField($field)
+    protected function verifyField($field): mixed
     {
         if (isset($_POST[$field]) && !empty(trim($_POST[$field]))) {
             return $_POST[$field];

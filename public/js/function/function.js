@@ -20,7 +20,7 @@ export function addLabelOnFocus(inputElement, labelFor, labelText) {
         const labelElement = document.createElement('label');
         labelElement.setAttribute('for', labelFor);
         labelElement.textContent = labelText;
-        labelElement.setAttribute('class', 'absolute top-0 text-gray-500 text-sm font-light text-grey-500 transition-all duration-300 ease-in-out');
+        labelElement.setAttribute('class', 'absolute top-0 left-2 px-1 py-px text-xs text-gray-500 transition-all duration-300 ease-in-out');
         inputElement.setAttribute('placeholder', '');
         const formControlDiv = this.parentElement;
         formControlDiv.insertBefore(labelElement, this);

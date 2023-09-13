@@ -1,4 +1,4 @@
-import {handleMenu} from "./function/function";
+import {handleMenu, addLabelOnFocus} from "./function/function";
 
 const btnConnected = document.querySelector('#btnActionUser');
 
@@ -17,13 +17,13 @@ const bio = document.querySelector('#bio');
 
 const editProfil = document.querySelector('#editProfil');
 
-// Get informations from the user
-
 // Obtenez l'URL actuelle
 const url = window.location.href;
 let segments = url.split('/');
 let idIndex = segments.indexOf('profil') + 1;
 const id = segments[idIndex];
+
+// Display Label
 
 async function getUserInfos(id) {
     const response = await fetch(`${window.location.origin}/moduleconnexionb2/profil/${id}/info`);
