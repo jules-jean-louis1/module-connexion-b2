@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Model;
+use PDO;
 
 class UserModel extends AbstractDatabase
 {

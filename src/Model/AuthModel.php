@@ -73,7 +73,7 @@ class AuthModel extends AbstractDatabase
     public function login(string $email, string $password): bool
     {
         $bdd = $this->getBdd();
-        $req = $bdd->prepare("SELECT id, username, email, password, avatar, role, bio FROM users WHERE email = :email OR username = :email");
+        $req = $bdd->prepare("SELECT id, username, firstname, lastname, email, password, avatar, role, bio FROM users WHERE email = :email OR username = :email");
         $req->bindParam(':email', $email, PDO::PARAM_STR);
         $req->execute();
         $user = $req->fetch();
@@ -83,6 +83,8 @@ class AuthModel extends AbstractDatabase
                 $_SESSION['user'] = [
                     'id' => $user['id'],
                     'username' => $user['username'],
+                    'firstname' => $user['firstname'],
+                    'lastname' => $user['lastname'],
                     'email' => $user['email'],
                     'avatar' => $user['avatar'],
                     'role' => $user['role'],

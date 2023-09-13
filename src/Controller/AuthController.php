@@ -163,9 +163,4 @@ class AuthController extends AbstractClasses\AbstractUserController
         session_destroy();
         header('Location: http://' . $_SERVER['HTTP_HOST'] . '/moduleconnexionb2/');
     }
-    public function profileInfoHeader()
-    {
-        $user = new AuthModel();
-
-    }
 }
