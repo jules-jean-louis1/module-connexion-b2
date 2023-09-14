@@ -130,7 +130,7 @@ class AuthController extends AbstractClasses\AbstractUserController
         }
     }
 
-    public function login()
+    public function login(): void
     {
         $email = $this->verifyField('email');
         $password = $this->verifyField('password');

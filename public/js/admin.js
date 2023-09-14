@@ -230,7 +230,7 @@ async function displayUsers() {
         const buttonsDelete = document.querySelector(`#buttonDelete_${user.id}`);
 
         buttonsDelete.addEventListener('click', async () => {
-            const response = await fetch(`${window.location.origin}/moduleconnexionb2/admin/users/${user.id}/delete`);
+            const response = await fetch(`/moduleconnexionb2/admin/users/${user.id}/delete`);
             const data = await response.json();
             if (data.success) {
                 setTimeout(() => {

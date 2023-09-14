@@ -18,8 +18,9 @@
     <div id="containerFormLoginRegister"></div>
     <div id="dialogModal_Overlay"></div>
     <h1>Profil</h1>
-    <section>
-        <div class="w-1/2">
+    <article class="flex justify-center">
+        <section class="w-1/2 flex flex-col">
+        <div class="w-full">
             <form action="" method="post" id="editProfil">
                 <div>
                     <div>
@@ -40,7 +41,7 @@
                     </div>
                 </div>
                 <div class="flex space-x-2 justify-between">
-                    <div>
+                    <div class="w-1/2">
                         <div class="relative">
                             <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
                                 <input name="firstname" id="firstname" class="bg-transparent text-black focus:outline-none">
@@ -49,7 +50,7 @@
                             <small id="errorFirstname"></small>
                         </div>
                     </div>
-                    <div>
+                    <div class="w-1/2">
                         <div>
                             <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
                                 <input name="lastname" id="lastname" class="bg-transparent text-black focus:outline-none">
@@ -59,7 +60,7 @@
                     </div>
                 </div>
                 <div class="flex space-x-2 justify-between">
-                    <div>
+                    <div class="w-1/2">
                         <div>
                             <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
                                 <input name="password" id="password" class="bg-transparent text-black focus:outline-none">
@@ -68,7 +69,7 @@
                             <small id="errorPassword"></small>
                         </div>
                     </div>
-                    <div>
+                    <div class="w-1/2">
                         <div>
                             <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
                                 <input name="passwordConfirm" id="passwordConfirm" class="bg-transparent text-black focus:outline-none">
@@ -94,6 +95,7 @@
             </form>
         </div>
     </section>
+    </article>
 </main>
 <footer>
     <?php require_once 'src/View/import/footer.php'; ?>
