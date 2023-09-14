@@ -43,6 +43,14 @@ export function showError(smallSelector, message){
     small.textContent = message;
 }
 
+/* Function success Handler */
+export function showSuccess(smallSelector, message){
+    const small = document.getElementById(smallSelector);
+    small.setAttribute("class", "text-green-500 text-sm")
+    small.innerHTML = '';
+    small.textContent = message;
+}
+
 /* Function to Create Dialog */
 
 function createDialog()

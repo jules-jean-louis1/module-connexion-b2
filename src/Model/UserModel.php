@@ -55,12 +55,17 @@ class UserModel extends AbstractDatabase
      * Function to get all users from database and return it in json format
      * Request who can change in function of the needs
      * Will return all users by order of creation, firstname, lastname, username, email, role, also can research by username, email, role
-     * @return void
+     * @return array
      */
-    public function getAllUsers(string $username, string $firstname, string $lastname, string $role, string $created_at, string $updated_at)
+    public function getAllUsers(string $search, string $username, string $firstname, string $lastname, string $role, string $created_at, string $updated_at): array
     {
         $bdd = $this->getBdd();
-        $sql = 'SELECT id, username, email, firstname, lastname, role, created_at, updated_at FROM users';
+        $sql = 'SELECT id, username, email, firstname, lastname, role, created_at, updated_at FROM users WHERE 1';
+
+        if (!empty($search)) {
+            $sql .= ' AND (username LIKE :search OR firstname LIKE :search OR lastname LIKE :search OR role LIKE :search)';
+        }
+
         if ($username !== 'default') {
             $sql .= ' ORDER BY username ' . $username;
         }
@@ -79,13 +84,21 @@ class UserModel extends AbstractDatabase
         if ($updated_at !== 'default') {
             $sql .= ' ORDER BY updated_at ' . $updated_at;
         }
+
         $req = $bdd->prepare($sql);
+
+        if (!empty($search)) {
+            $searchParam = '%' . $search . '%';
+            $req->bindValue(':search', $searchParam, \PDO::PARAM_STR);
+        }
+
         $req->execute();
         $users = $req->fetchAll(\PDO::FETCH_ASSOC);
         return $users;
     }
 
-    public function deleteUser(int $id)
+
+    public function deleteUser(int $id): void
     {
         $bdd = $this->getBdd();
         $req = $bdd->prepare('DELETE FROM users WHERE id = :id');
@@ -93,11 +106,12 @@ class UserModel extends AbstractDatabase
         $req->execute();
     }
 
-    public function editUserRole(int $id)
+    public function editUserRole(int $id, string $role): void
     {
         $bdd = $this->getBdd();
-        $req = $bdd->prepare('UPDATE users SET role = "admin" WHERE id = :id');
+        $req = $bdd->prepare('UPDATE users SET role = :role WHERE id = :id');
         $req->bindParam(':id', $id, \PDO::PARAM_INT);
+        $req->bindParam(':role', $role, \PDO::PARAM_STR);
         $req->execute();
     }
 }

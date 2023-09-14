@@ -5,10 +5,10 @@ use App\Model\UserModel;
 
 class AdminController
 {
-    public function getAllUsers(string $username, string $firstname, string $lastname, string $role, string $createdAt, string $updatedAt)
+    public function getAllUsers(string $search,string $username, string $firstname, string $lastname, string $role, string $createdAt, string $updatedAt)
     {
         $userModel = new UserModel();
-        $users = $userModel->getAllUsers($username, $firstname, $lastname, $role, $createdAt, $updatedAt);
+        $users = $userModel->getAllUsers($search,$username, $firstname, $lastname, $role, $createdAt, $updatedAt);
         echo json_encode($users);
     }
     public function deleteUser(int $id)
@@ -36,6 +36,7 @@ class AdminController
     {
         $userModel = new UserModel();
         $errors = [];
+        $role = $_POST['role'];
 
         if (isset($_SESSION['user']) && $_SESSION['user']['id'] === $id) {
             $errors['error'] = 'Vous ne pouvez pas modifier votre rôle';
@@ -47,8 +48,10 @@ class AdminController
             $errors['error'] = 'Vous ne pouvez pas modifier le rôle du compte superAdmin';
         }
         if (empty($errors)) {
-            $userModel->editUserRole($id);
+            $userModel->editUserRole($id,$role);
             $errors['success'] = 'Le rôle de l\'utilisateur a bien été modifié';
+        } else {
+            $errors['error'] = 'Une erreur est survenue';
         }
         echo json_encode($errors);
     }

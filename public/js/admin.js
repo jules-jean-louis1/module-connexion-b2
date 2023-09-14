@@ -1,4 +1,4 @@
-import {handleMenu, addLabelOnFocus, showError, convertDate} from "./function/function";
+import {handleMenu, addLabelOnFocus, showError, showSuccess, convertDate} from "./function/function";
 
 const btnConnected = document.querySelector('#btnActionUser');
 
@@ -13,6 +13,11 @@ const btnLastname = document.querySelector('#btnLastname');
 const btnRole = document.querySelector('#btnRole');
 const btnCreatedAt = document.querySelector('#btnCreatedAt');
 const btnUpdatedAt = document.querySelector('#btnUpdatedAt');
+const btnEraseSearch = document.querySelector('#supprSearch');
+const inputSearch = document.querySelector('#search');
+const containerMessage = document.querySelector('#containerMessage');
+let search = inputSearch.value;
+
 
 let orderUsername = 'default';
 let orderFirstname = 'default';
@@ -131,9 +136,25 @@ btnUpdatedAt.addEventListener('click', function () {
     svgUpdatedAt.setAttribute('stroke', '#0e1217')
 });
 
+inputSearch.addEventListener('keyup', function () {
+    search = inputSearch.value;
+    if (search.length > 0) {
+        btnEraseSearch.classList.remove('hidden');
+        btnEraseSearch.addEventListener('click', function () {
+            inputSearch.value = '';
+            search = '';
+            btnEraseSearch.classList.add('hidden');
+            displayUsers();
+        });
+    } else {
+        btnEraseSearch.classList.add('hidden');
+    }
+
+    displayUsers();
+});
 
 async function displayUsers() {
-    const url = `${window.location.origin}/moduleconnexionb2/admin/users/${orderUsername}/${orderFirstname}/${orderLastname}/${orderRole}/${orderCreatedAt}/${orderUpdatedAt}`
+    const url = `${window.location.origin}/moduleconnexionb2/admin/users/${search}/${orderUsername}/${orderFirstname}/${orderLastname}/${orderRole}/${orderCreatedAt}/${orderUpdatedAt}`
     const response = await fetch(url);
     const data = await response.json();
 
@@ -165,7 +186,7 @@ async function displayUsers() {
 
         const roleCell = document.createElement('td');
         roleCell.innerHTML = `
-        <form method="post" id="formRole_${user.id}">
+        <form method="POST" id="formRole_${user.id}">
             <select name="role" id="role_${user.id}" class="form-select">
                 <option value="user" ${role === 'Utilisateur' ? 'selected' : ''}>Utilisateur</option>
                 <option value="admin" ${role === 'Administrateur' ? 'selected' : ''}>Administrateur</option>
@@ -211,20 +232,37 @@ async function displayUsers() {
         buttonsDelete.addEventListener('click', async () => {
             const response = await fetch(`${window.location.origin}/moduleconnexionb2/admin/users/${user.id}/delete`);
             const data = await response.json();
-            console.log(data);
             if (data.success) {
+                setTimeout(() => {
+                    showSuccess('containerMessage', data.success);
+                }, 2000);
                 displayUsers();
+            }
+            if (data.error) {
+                setTimeout(() => {
+                    showError('containerMessage', data.error);
+                }, 2000);
             }
         });
         const formRole = document.querySelector(`#formRole_${user.id}`);
         formRole.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const response = await fetch(`${window.location.origin}/moduleconnexionb2/admin/users/${user.id}/role`, {
+            const response = await fetch(`/moduleconnexionb2/admin/users/role/${user.id}`, {
                 method: 'POST',
                 body: new FormData(formRole)
             });
             const data = await response.json();
-            console.log(data);
+            if (data.success) {
+                setTimeout(() => {
+                    showSuccess('containerMessage', data.success);
+                }, 2000);
+                displayUsers();
+            }
+            if (data.error) {
+                setTimeout(() => {
+                    showError('containerMessage', data.error);
+                }, 2000);
+            }
         });
     });
 }

@@ -38,15 +38,15 @@ $router->map( 'GET', '/contact', function() {
 $router->map( 'GET', '/admin', function() {
     require 'src/View/admin.php';
 });
-$router->map('GET', '/admin/users/[a:username]/[a:firstname]/[a:lastname]/[a:role]/[a:createdAt]/[a:updatedAt]', function ($username, $firstname, $lastname, $role, $createdAt, $updatedAt) use ($adminController) {
-    $adminController->getAllUsers($username, $firstname, $lastname, $role, $createdAt, $updatedAt);
+$router->map('GET', '/admin/users/[*:search]?/[a:username]/[a:firstname]/[a:lastname]/[a:role]/[a:createdAt]/[a:updatedAt]', function ($search,$username, $firstname, $lastname, $role, $createdAt, $updatedAt) use ($adminController) {
+    $adminController->getAllUsers($search, $username, $firstname, $lastname, $role, $createdAt, $updatedAt);
 });
 // map delete user
 $router->map('GET', '/admin/users/[i:id]/delete', function ($id) use ($adminController) {
     $adminController->deleteUser($id);
 });
 // map edit role user
-$router->map('POST', '/admin/users/[i:id]/role', function ($id) use ($adminController) {
+$router->map('POST', '/admin/users/role/[i:id]', function ($id) use ($adminController) {
     $adminController->editUserRole($id);
 });
 
