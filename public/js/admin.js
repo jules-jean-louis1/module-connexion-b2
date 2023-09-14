@@ -20,6 +20,13 @@ let orderLastname = 'default';
 let orderRole = 'default';
 let orderCreatedAt = 'default';
 let orderUpdatedAt = 'default';
+
+const svgUsername = document.querySelector('#svg_username');
+const svgFirstname = document.querySelector('#svg_firstname');
+const svgLastname = document.querySelector('#svg_lastname');
+const svgRole = document.querySelector('#svg_role');
+const svgCreatedAt = document.querySelector('#svg_created_at');
+const svgUpdatedAt = document.querySelector('#svg_updated_at');
 btnUsername.addEventListener('click', function () {
     orderUsername = orderUsername === 'default' ? 'desc' : 'asc';
     btnUsername.value = orderUsername;
@@ -29,8 +36,13 @@ btnUsername.addEventListener('click', function () {
     orderCreatedAt = 'default';
     orderUpdatedAt = 'default';
 
-    const svgUsername = document.querySelector('#svg_username');
+
     svgUsername.setAttribute('stroke', '#0e1217')
+    svgFirstname.setAttribute('stroke', '#d1d1d1')
+    svgLastname.setAttribute('stroke', '#d1d1d1')
+    svgRole.setAttribute('stroke', '#d1d1d1')
+    svgCreatedAt.setAttribute('stroke', '#d1d1d1')
+    svgUpdatedAt.setAttribute('stroke', '#d1d1d1')
     displayUsers();
 });
 btnFirstname.addEventListener('click', function () {
@@ -41,6 +53,13 @@ btnFirstname.addEventListener('click', function () {
     orderRole = 'default';
     orderCreatedAt = 'default';
     orderUpdatedAt = 'default';
+
+    svgUsername.setAttribute('stroke', '#d1d1d1')
+    svgFirstname.setAttribute('stroke', '#0e1217')
+    svgLastname.setAttribute('stroke', '#d1d1d1')
+    svgRole.setAttribute('stroke', '#d1d1d1')
+    svgCreatedAt.setAttribute('stroke', '#d1d1d1')
+    svgUpdatedAt.setAttribute('stroke', '#d1d1d1')
     displayUsers();
 });
 btnLastname.addEventListener('click', function () {
@@ -52,6 +71,13 @@ btnLastname.addEventListener('click', function () {
     orderCreatedAt = 'default';
     orderUpdatedAt = 'default';
     displayUsers();
+
+    svgUsername.setAttribute('stroke', '#d1d1d1')
+    svgFirstname.setAttribute('stroke', '#d1d1d1')
+    svgLastname.setAttribute('stroke', '#0e1217')
+    svgRole.setAttribute('stroke', '#d1d1d1')
+    svgCreatedAt.setAttribute('stroke', '#d1d1d1')
+    svgUpdatedAt.setAttribute('stroke', '#d1d1d1')
 });
 btnRole.addEventListener('click', function () {
     orderRole = orderRole === 'default' ? 'desc' : 'asc';
@@ -61,6 +87,13 @@ btnRole.addEventListener('click', function () {
     orderLastname = 'default';
     orderCreatedAt = 'default';
     orderUpdatedAt = 'default';
+
+    svgUsername.setAttribute('stroke', '#d1d1d1')
+    svgFirstname.setAttribute('stroke', '#d1d1d1')
+    svgLastname.setAttribute('stroke', '#d1d1d1')
+    svgRole.setAttribute('stroke', '#0e1217')
+    svgCreatedAt.setAttribute('stroke', '#d1d1d1')
+    svgUpdatedAt.setAttribute('stroke', '#d1d1d1')
     displayUsers();
 });
 btnCreatedAt.addEventListener('click', function () {
@@ -71,6 +104,13 @@ btnCreatedAt.addEventListener('click', function () {
     orderLastname = 'default';
     orderRole = 'default';
     orderUpdatedAt = 'default';
+
+    svgUsername.setAttribute('stroke', '#d1d1d1')
+    svgFirstname.setAttribute('stroke', '#d1d1d1')
+    svgLastname.setAttribute('stroke', '#d1d1d1')
+    svgRole.setAttribute('stroke', '#d1d1d1')
+    svgCreatedAt.setAttribute('stroke', '#0e1217')
+    svgUpdatedAt.setAttribute('stroke', '#d1d1d1')
     displayUsers();
 });
 btnUpdatedAt.addEventListener('click', function () {
@@ -82,6 +122,13 @@ btnUpdatedAt.addEventListener('click', function () {
     orderRole = 'default';
     orderCreatedAt = 'default';
     displayUsers();
+
+    svgUsername.setAttribute('stroke', '#d1d1d1')
+    svgFirstname.setAttribute('stroke', '#d1d1d1')
+    svgLastname.setAttribute('stroke', '#d1d1d1')
+    svgRole.setAttribute('stroke', '#d1d1d1')
+    svgCreatedAt.setAttribute('stroke', '#d1d1d1')
+    svgUpdatedAt.setAttribute('stroke', '#0e1217')
 });
 
 
@@ -89,7 +136,7 @@ async function displayUsers() {
     const url = `${window.location.origin}/moduleconnexionb2/admin/users/${orderUsername}/${orderFirstname}/${orderLastname}/${orderRole}/${orderCreatedAt}/${orderUpdatedAt}`
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data);
+
     const containerUsersBody = document.querySelector('#containerUsersBody');
     containerUsersBody.innerHTML = '';
     data.forEach(user => {
@@ -128,6 +175,14 @@ async function displayUsers() {
         updatedAtCell.textContent = user.updated_at === null ? 'Non renseigné' : convertDate(user.updated_at)
         updatedAtCell.classList.add('text-center', 'align-middle', 'p-0.5', 'px-1.5', 'border', 'border-gray-200', 'hover:bg-gray-100', 'transition', 'duration-300');
 
+        const actionCell = document.createElement('td');
+        actionCell.classList.add('text-center', 'align-middle', 'p-0.5', 'px-1.5', 'border', 'border-gray-200', 'hover:bg-gray-100', 'transition', 'duration-300');
+        actionCell.innerHTML = `
+        <button id="buttonDelete_${user.id}">
+            Supprimer
+        </button>
+        `;
+
         // Ajoutez les cellules à la ligne
         row.appendChild(idCell);
         row.appendChild(usernameCell);
@@ -137,7 +192,18 @@ async function displayUsers() {
         row.appendChild(roleCell);
         row.appendChild(createdAtCell);
         row.appendChild(updatedAtCell);
+        row.appendChild(actionCell);
         containerUsersBody.appendChild(row);
+        const buttonsDelete = document.querySelector(`#buttonDelete_${user.id}`);
+
+        buttonsDelete.addEventListener('click', async () => {
+            const response = await fetch(`${window.location.origin}/moduleconnexionb2/admin/users/${user.id}/delete`);
+            const data = await response.json();
+            console.log(data);
+            if (data.success) {
+                displayUsers();
+            }
+        });
     });
 }
 function resetValues(currentButton) {

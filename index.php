@@ -41,7 +41,10 @@ $router->map( 'GET', '/admin', function() {
 $router->map('GET', '/admin/users/[a:username]/[a:firstname]/[a:lastname]/[a:role]/[a:createdAt]/[a:updatedAt]', function ($username, $firstname, $lastname, $role, $createdAt, $updatedAt) use ($adminController) {
     $adminController->getAllUsers($username, $firstname, $lastname, $role, $createdAt, $updatedAt);
 });
-
+// map delete user
+$router->map('GET', '/admin/users/[i:id]/delete', function ($id) use ($adminController) {
+    $adminController->deleteUser($id);
+});
 /* Form Auth */
 $router->map('GET', '/login', function () {
     require 'src/View/import/form/loginForm.php';

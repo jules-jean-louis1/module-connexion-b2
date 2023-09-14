@@ -84,4 +84,12 @@ class UserModel extends AbstractDatabase
         $users = $req->fetchAll(\PDO::FETCH_ASSOC);
         return $users;
     }
+
+    public function deleteUser(int $id)
+    {
+        $bdd = $this->getBdd();
+        $req = $bdd->prepare('DELETE FROM users WHERE id = :id');
+        $req->bindParam(':id', $id, \PDO::PARAM_INT);
+        $req->execute();
+    }
 }
