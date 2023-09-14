@@ -1,4 +1,4 @@
-import {handleMenu, addLabelOnFocus, showError} from "./function/function";
+import {handleMenu, addLabelOnFocus, showError, convertDate} from "./function/function";
 
 const btnConnected = document.querySelector('#btnActionUser');
 
@@ -14,119 +14,96 @@ const btnRole = document.querySelector('#btnRole');
 const btnCreatedAt = document.querySelector('#btnCreatedAt');
 const btnUpdatedAt = document.querySelector('#btnUpdatedAt');
 
-let orderUsername = 'asc';
-let orderEmail = 'asc';
-let orderFirstname = 'asc';
-let orderLastname = 'asc';
-let orderRole = 'asc';
-let orderCreatedAt = 'asc';
-let orderUpdatedAt = 'asc';
+let orderUsername = 'default';
+let orderFirstname = 'default';
+let orderLastname = 'default';
+let orderRole = 'default';
+let orderCreatedAt = 'default';
+let orderUpdatedAt = 'default';
 btnUsername.addEventListener('click', function () {
-    orderUsername = orderUsername === 'asc' ? 'desc' : 'asc';
+    orderUsername = orderUsername === 'default' ? 'desc' : 'asc';
     btnUsername.value = orderUsername;
+    orderFirstname = 'default';
+    orderLastname = 'default';
+    orderRole = 'default';
+    orderCreatedAt = 'default';
+    orderUpdatedAt = 'default';
     displayUsers();
 });
-btnEmail.addEventListener('click', function () {
-    orderEmail = orderEmail === 'asc' ? 'desc' : 'asc';
-    btnEmail.value = orderEmail;
-    return orderEmail;
-});
 btnFirstname.addEventListener('click', function () {
-    orderFirstname = orderFirstname === 'asc' ? 'desc' : 'asc';
+    orderFirstname = orderFirstname === 'default' ? 'desc' : 'asc';
     btnFirstname.value = orderFirstname;
-    return orderFirstname;
+    displayUsers();
 });
 btnLastname.addEventListener('click', function () {
-    orderLastname = orderLastname === 'asc' ? 'desc' : 'asc';
+    orderLastname = orderLastname === 'default' ? 'desc' : 'asc';
     btnLastname.value = orderLastname;
-    return orderLastname;
+    displayUsers();
 });
 btnRole.addEventListener('click', function () {
-    orderRole = orderRole === 'asc' ? 'desc' : 'asc';
+    orderRole = orderRole === 'default' ? 'desc' : 'asc';
     btnRole.value = orderRole;
-    return orderRole;
+    displayUsers();
 });
 btnCreatedAt.addEventListener('click', function () {
-    orderCreatedAt = orderCreatedAt === 'asc' ? 'desc' : 'asc';
+    orderCreatedAt = orderCreatedAt === 'default' ? 'desc' : 'asc';
     btnCreatedAt.value = orderCreatedAt;
-    return orderCreatedAt;
+    displayUsers();
 });
 btnUpdatedAt.addEventListener('click', function () {
-    orderUpdatedAt = orderUpdatedAt === 'asc' ? 'desc' : 'asc';
+    orderUpdatedAt = orderUpdatedAt === 'default' ? 'desc' : 'asc';
     btnUpdatedAt.value = orderUpdatedAt;
-    return orderUpdatedAt;
+    displayUsers();
 });
 
-let usernameValue = btnUsername.value;
-let emailValue = btnEmail.value;
-let firstnameValue = btnFirstname.value;
-let lastnameValue = btnLastname.value;
-let roleValue = btnRole.value;
-let createdAtValue = btnCreatedAt.value;
-let updatedAtValue = btnUpdatedAt.value;
 
 async function displayUsers() {
-    if (usernameValue !== 'default') {
-        emailValue = 'default';
-        firstnameValue = 'default';
-        lastnameValue = 'default';
-        roleValue = 'default';
-        createdAtValue = 'default';
-        updatedAtValue = 'default';
-    }
-    if (emailValue !== 'default') {
-        usernameValue = 'default';
-        firstnameValue = 'default';
-        lastnameValue = 'default';
-        roleValue = 'default';
-        createdAtValue = 'default';
-        updatedAtValue = 'default';
-    }
-    if (firstnameValue !== 'default') {
-        usernameValue = 'default';
-        emailValue = 'default';
-        lastnameValue = 'default';
-        roleValue = 'default';
-        createdAtValue = 'default';
-        updatedAtValue = 'default';
-    }
-    if (lastnameValue !== 'default') {
-        usernameValue = 'default';
-        emailValue = 'default';
-        firstnameValue = 'default';
-        roleValue = 'default';
-        createdAtValue = 'default';
-        updatedAtValue = 'default';
-    }
-    if (roleValue !== 'default') {
-        usernameValue = 'default';
-        emailValue = 'default';
-        firstnameValue = 'default';
-        lastnameValue = 'default';
-        createdAtValue = 'default';
-        updatedAtValue = 'default';
-    }
-    if (createdAtValue !== 'default') {
-        usernameValue = 'default';
-        emailValue = 'default';
-        firstnameValue = 'default';
-        lastnameValue = 'default';
-        roleValue = 'default';
-        updatedAtValue = 'default';
-    }
-    if (updatedAtValue !== 'default') {
-        usernameValue = 'default';
-        emailValue = 'default';
-        firstnameValue = 'default';
-        lastnameValue = 'default';
-        roleValue = 'default';
-        createdAtValue = 'default';
-    }
-
-
-    const response = await fetch(`${window.location.origin}/moduleconnexionb2/admin/users/${usernameValue}/${firstnameValue}/${lastnameValue}/${roleValue}/${createdAtValue}/${updatedAtValue}`);
+    const url = `${window.location.origin}/moduleconnexionb2/admin/users/${orderUsername}/${orderFirstname}/${orderLastname}/${orderRole}/${orderCreatedAt}/${orderUpdatedAt}`
+    const response = await fetch(url);
     const data = await response.json();
     console.log(data);
+    const containerUsersBody = document.querySelector('#containerUsersBody');
+    containerUsersBody.innerHTML = '';
+    data.forEach(user => {
+        const row = document.createElement('tr');
+        const role = user.role === 'admin' ? 'Administrateur' : 'Utilisateur';
+
+        const idCell = document.createElement('td');
+        idCell.textContent = user.id;
+        // Créez des cellules de tableau pour chaque propriété de l'utilisateur
+        const usernameCell = document.createElement('td');
+        usernameCell.textContent = user.username;
+
+        const emailCell = document.createElement('td');
+        emailCell.textContent = user.email;
+
+        const firstnameCell = document.createElement('td');
+        firstnameCell.textContent = user.firstname;
+
+        const lastnameCell = document.createElement('td');
+        lastnameCell.textContent = user.lastname;
+
+        const roleCell = document.createElement('td');
+        roleCell.textContent = role;
+
+        const createdAtCell = document.createElement('td');
+
+        createdAtCell.textContent = convertDate(user.created_at);
+
+        const updatedAtCell = document.createElement('td');
+        updatedAtCell.textContent = convertDate(user.updated_at);
+
+        // Ajoutez les cellules à la ligne
+        row.appendChild(idCell);
+        row.appendChild(usernameCell);
+        row.appendChild(emailCell);
+        row.appendChild(firstnameCell);
+        row.appendChild(lastnameCell);
+        row.appendChild(roleCell);
+        row.appendChild(createdAtCell);
+        row.appendChild(updatedAtCell);
+        containerUsersBody.appendChild(row);
+    });
 }
 function resetValues(currentButton) {
     const buttons = [btnUsername, btnEmail, btnFirstname, btnLastname, btnRole, btnCreatedAt, btnUpdatedAt];

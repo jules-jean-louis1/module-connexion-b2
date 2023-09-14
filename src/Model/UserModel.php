@@ -57,27 +57,27 @@ class UserModel extends AbstractDatabase
      * Will return all users by order of creation, firstname, lastname, username, email, role, also can research by username, email, role
      * @return void
      */
-    public function getAllUsers(string $username, string $firstname, string $lastname, string $role, string $created_at, string $updated_at): array
+    public function getAllUsers(string $username, string $firstname, string $lastname, string $role, string $created_at, string $updated_at)
     {
         $bdd = $this->getBdd();
         $sql = 'SELECT id, username, email, firstname, lastname, role, created_at, updated_at FROM users';
         if ($username !== 'default') {
-            $sql .= 'ORDER BY username ' . $username;
+            $sql .= ' ORDER BY username ' . $username;
         }
         if ($firstname !== 'default') {
-            $sql .= 'ORDER BY firstname ' . $firstname;
+            $sql .= ' ORDER BY firstname ' . $firstname;
         }
         if ($lastname !== 'default') {
-            $sql .= 'ORDER BY lastname ' . $lastname;
+            $sql .= ' ORDER BY lastname ' . $lastname;
         }
         if ($role !== 'default') {
-            $sql .= 'ORDER BY role ' . $role;
+            $sql .= ' ORDER BY role ' . $role;
         }
         if ($created_at !== 'default') {
-            $sql .= 'ORDER BY created_at ' . $created_at;
+            $sql .= ' ORDER BY created_at ' . $created_at;
         }
         if ($updated_at !== 'default') {
-            $sql .= 'ORDER BY updated_at ' . $updated_at;
+            $sql .= ' ORDER BY updated_at ' . $updated_at;
         }
         $req = $bdd->prepare($sql);
         $req->execute();

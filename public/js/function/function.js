@@ -282,3 +282,14 @@ export async function loginRegisterForm(btnLogin)
         });
     });
 }
+
+/* Function to convert date */
+
+export function convertDate(timestamp) {
+    const months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+    const date = new Date(timestamp);
+    const year = date.getFullYear();
+    const month = months[date.getMonth()];
+    const day = date.getDate();
+    return `${day} ${month} ${year}`;
+}

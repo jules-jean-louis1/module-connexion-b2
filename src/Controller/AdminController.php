@@ -10,5 +10,6 @@ class AdminController
         $userModel = new UserModel();
         $users = $userModel->getAllUsers($username, $firstname, $lastname, $role, $createdAt, $updatedAt);
         echo json_encode($users);
+        /*var_dump($users);*/
     }
 }
