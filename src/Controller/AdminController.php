@@ -31,4 +31,25 @@ class AdminController
         }
         echo json_encode($errors);
     }
+
+    public function editUserRole(int $id)
+    {
+        $userModel = new UserModel();
+        $errors = [];
+
+        if (isset($_SESSION['user']) && $_SESSION['user']['id'] === $id) {
+            $errors['error'] = 'Vous ne pouvez pas modifier votre rôle';
+        }
+        if ($_SESSION['user']['role'] !== 'admin') {
+            $errors['error'] = 'Vous n\'avez pas les droits pour modifier un rôle';
+        }
+        if ($id === 2) {
+            $errors['error'] = 'Vous ne pouvez pas modifier le rôle du compte superAdmin';
+        }
+        if (empty($errors)) {
+            $userModel->editUserRole($id);
+            $errors['success'] = 'Le rôle de l\'utilisateur a bien été modifié';
+        }
+        echo json_encode($errors);
+    }
 }

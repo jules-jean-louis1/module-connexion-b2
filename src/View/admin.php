@@ -22,7 +22,7 @@
 <main>
     <div id="containerFormLoginRegister"></div>
     <div id="dialogModal_Overlay"></div>
-    <h1>Home</h1>
+    <h1 class="flex justify-center">Dashboard</h1>
     <section>
         <div id="containerUsers" class="flex justify-center">
             <table class="rounded">

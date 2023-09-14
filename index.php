@@ -45,6 +45,10 @@ $router->map('GET', '/admin/users/[a:username]/[a:firstname]/[a:lastname]/[a:rol
 $router->map('GET', '/admin/users/[i:id]/delete', function ($id) use ($adminController) {
     $adminController->deleteUser($id);
 });
+// map edit role user
+$router->map('POST', '/admin/users/[i:id]/role', function ($id) use ($adminController) {
+    $adminController->editUserRole($id);
+});
 /* Form Auth */
 $router->map('GET', '/login', function () {
     require 'src/View/import/form/loginForm.php';

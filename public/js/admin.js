@@ -164,7 +164,14 @@ async function displayUsers() {
         lastnameCell.classList.add('text-center', 'align-middle', 'p-0.5', 'px-1.5', 'border', 'border-gray-200', 'hover:bg-gray-100', 'transition', 'duration-300');
 
         const roleCell = document.createElement('td');
-        roleCell.textContent = role;
+        roleCell.innerHTML = `
+        <form method="post" id="formRole_${user.id}">
+            <select name="role" id="role_${user.id}" class="form-select">
+                <option value="user" ${role === 'Utilisateur' ? 'selected' : ''}>Utilisateur</option>
+                <option value="admin" ${role === 'Administrateur' ? 'selected' : ''}>Administrateur</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Modifier</button>
+        </form>`;
         roleCell.classList.add('text-center', 'align-middle', 'p-0.5', 'px-1.5', 'border', 'border-gray-200', 'hover:bg-gray-100', 'transition', 'duration-300');
 
         const createdAtCell = document.createElement('td');
@@ -208,6 +215,16 @@ async function displayUsers() {
             if (data.success) {
                 displayUsers();
             }
+        });
+        const formRole = document.querySelector(`#formRole_${user.id}`);
+        formRole.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const response = await fetch(`${window.location.origin}/moduleconnexionb2/admin/users/${user.id}/role`, {
+                method: 'POST',
+                body: new FormData(formRole)
+            });
+            const data = await response.json();
+            console.log(data);
         });
     });
 }

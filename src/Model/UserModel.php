@@ -92,4 +92,12 @@ class UserModel extends AbstractDatabase
         $req->bindParam(':id', $id, \PDO::PARAM_INT);
         $req->execute();
     }
+
+    public function editUserRole(int $id)
+    {
+        $bdd = $this->getBdd();
+        $req = $bdd->prepare('UPDATE users SET role = "admin" WHERE id = :id');
+        $req->bindParam(':id', $id, \PDO::PARAM_INT);
+        $req->execute();
+    }
 }
