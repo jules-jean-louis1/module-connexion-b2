@@ -1,5 +1,5 @@
-<div id="containerHeader" class="py-3 hidden md:block">
-    <nav class="flex justify-between items-center px-6">
+<div id="containerHeader" class="hidden md:block">
+    <nav class="flex justify-between items-center p-4  border-b border-[#52586633]">
         <div id="containerLogo" class="flex space-x-2">
             <a href="index.php">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
