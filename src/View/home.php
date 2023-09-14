@@ -14,10 +14,21 @@
     <header>
         <?php require_once 'src/View/import/header.php'; ?>
     </header>
-    <main>
+    <main class="h-[92vh]">
         <div id="containerFormLoginRegister"></div>
         <div id="dialogModal_Overlay"></div>
-        <h1>Home</h1>
+        <section id="mainContainerHome" class="flex justify-between h-full">
+            <div id="left90degresponsive" class="flex items-center">
+                <h3 class="text-4xl uppercase">Homepage</h3>
+                <div class="w-10 bg-gray-600" id="barre_dialog"></div>
+            </div>
+            <div class="flex items-end" id="title_Homepage">
+                <div id="bottomPageTitle" class="flex flex-col items-end playfair_display">
+                    <div class="font-bold uppercase text-[9rem] lg:-mt-6 lg:-mb-9">module</div>
+                    <div class="font-bold uppercase text-[9rem] lg:-mt-6 lg:-mb-9">de connexion</div>
+                </div>
+            </div>
+        </section>
     </main>
     <footer>
         <?php require_once 'src/View/import/footer.php'; ?>

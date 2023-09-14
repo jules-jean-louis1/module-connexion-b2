@@ -49,6 +49,11 @@ $router->map('GET', '/admin/users/[i:id]/delete', function ($id) use ($adminCont
 $router->map('POST', '/admin/users/[i:id]/role', function ($id) use ($adminController) {
     $adminController->editUserRole($id);
 });
+
+//map docs page
+$router->map( 'GET', '/docs', function() {
+    require 'src/View/docs.php';
+});
 /* Form Auth */
 $router->map('GET', '/login', function () {
     require 'src/View/import/form/loginForm.php';
