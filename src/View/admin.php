@@ -24,47 +24,101 @@
     <div id="dialogModal_Overlay"></div>
     <h1>Home</h1>
     <section>
-        <div id="containerUsers">
-            <table>
-                <thead>
-                    <th>
+        <div id="containerUsers" class="flex justify-center">
+            <table class="rounded">
+                <thead class="py-1 bg-[#f1f2f3] border border-[#52586633] text-center rounded-t-2xl">
+                    <th class="p-1.5 border-r border-[#52586633]">
                         <button type="button" value="default" name="id" id="btnId">
                             ID
                         </button>
                     </th>
-                    <th>
-                        <button type="button" value="default" name="username" id="btnUsername">
-                            Nom d'utilisateur
+                    <th class="p-1.5 border-r border-[#52586633] hover:bg-[#EAEBEC]">
+                        <button type="button" value="default" name="username" id="btnUsername" class="flex space-x-2 items-center">
+                            <span>Nom d'utilisateur</span>
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" id="svg_username" class="icon icon-tabler icon-tabler-arrows-down-up" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="#d1d1d1" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M17 3l0 18"/>
+                                    <path d="M10 18l-3 3l-3 -3"/>
+                                    <path d="M7 21l0 -18"/>
+                                    <path d="M20 6l-3 -3l-3 3"/>
+                                </svg>
+                            </span>
                         </button>
                     </th>
-                    <th>
+                    <th class="p-1.5 border-r border-[#52586633] hover:bg-[#EAEBEC]">
                         <button type="button" value="default" name="email" id="btnEmail">
                             Email
                         </button>
                     </th>
-                    <th>
-                        <button type="button" value="default" name="firstname" id="btnFirstname">
-                            Prénom
+                    <th class="p-1.5 border-r border-[#52586633] hover:bg-[#EAEBEC]">
+                        <button type="button" value="default" name="firstname" id="btnFirstname" class="flex space-x-2 items-center">
+                            <span>Prénom</span>
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrows-down-up" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="#676a6d" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M17 3l0 18"/>
+                                    <path d="M10 18l-3 3l-3 -3"/>
+                                    <path d="M7 21l0 -18"/>
+                                    <path d="M20 6l-3 -3l-3 3"/>
+                                </svg>
+                            </span>
                         </button>
                     </th>
-                    <th>
-                        <button type="button" value="default" name="lastname" id="btnLastname">
-                            Nom
+                    <th class="p-1.5 border-r border-[#52586633] hover:bg-[#EAEBEC]">
+                        <button type="button" value="default" name="lastname" id="btnLastname" class="flex space-x-2 items-center">
+                            <span>Nom</span>
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrows-down-up" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="#676a6d" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M17 3l0 18"/>
+                                    <path d="M10 18l-3 3l-3 -3"/>
+                                    <path d="M7 21l0 -18"/>
+                                    <path d="M20 6l-3 -3l-3 3"/>
+                                </svg>
+                            </span>
                         </button>
                     </th>
-                    <th>
-                        <button type="button" value="default" name="role" id="btnRole">
-                            Rôle
+                    <th class="p-1.5 border-r border-[#52586633] hover:bg-[#EAEBEC]">
+                        <button type="button" value="default" name="role" id="btnRole" class="flex space-x-2 items-center">
+                            <span>Rôle</span>
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrows-down-up" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="#676a6d" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M17 3l0 18"/>
+                                    <path d="M10 18l-3 3l-3 -3"/>
+                                    <path d="M7 21l0 -18"/>
+                                    <path d="M20 6l-3 -3l-3 3"/>
+                                </svg>
+                            </span>
                         </button>
                     </th>
-                    <th>
-                        <button type="button" value="default" name="created_at" id="btnCreatedAt">
-                            Créer
+                    <th class="p-1.5 border-r border-[#52586633] hover:bg-[#EAEBEC]">
+                        <button type="button" value="default" name="created_at" id="btnCreatedAt" class="flex space-x-2 items-center">
+                            <span>Créer le</span>
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrows-down-up" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="#676a6d" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M17 3l0 18"/>
+                                    <path d="M10 18l-3 3l-3 -3"/>
+                                    <path d="M7 21l0 -18"/>
+                                    <path d="M20 6l-3 -3l-3 3"/>
+                                </svg>
+                            </span>
                         </button>
                     </th>
-                    <th>
-                        <button type="button" value="default" name="updated_at" id="btnUpdatedAt">
-                            Modifier
+                    <th class="flex justify-center p-1.5 hover:bg-[#EAEBEC]">
+                        <button type="button" value="default" name="updated_at" id="btnUpdatedAt" class="flex space-x-2 items-center">
+                            <span>Modifier le</span>
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrows-down-up" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="#676a6d" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M17 3l0 18"/>
+                                    <path d="M10 18l-3 3l-3 -3"/>
+                                    <path d="M7 21l0 -18"/>
+                                    <path d="M20 6l-3 -3l-3 3"/>
+                                </svg>
+                            </span>
                         </button>
                     </th>
                 </thead>
