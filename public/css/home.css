@@ -15,7 +15,7 @@
 #dialog {
     position: fixed;
     left: 50%;
-    top: 50%;
+    top: 45%;
     transform: translate(-50%, -50%);
 }
 
@@ -83,4 +83,17 @@
     width: 754px;
     margin-left: 12px;
     border-radius: 2px;
+}
+
+.bg-overlay-quaternary-onion {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    min-height: 100vh;
+    padding: 0;
+    overflow-y: scroll;
+    z-index: 10;
+    background-color: #6637e93d;
 }

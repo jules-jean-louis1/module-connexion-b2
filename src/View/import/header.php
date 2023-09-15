@@ -16,12 +16,12 @@
         <div>
             <ul class="flex items-center space-x-6">
                 <li>
-                    <a href="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/moduleconnexionb2/docs'; ?>" class="font-semibold hover:text-[#7a1ea1] transition duration-100">
+                    <a href="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/moduleconnexionb2/docs'; ?>" class="font-semibold hover:text-[#ac1de4] transition duration-100">
                         Docs
                     </a>
                 </li>
                 <li>
-                    <a href="https://jules-jean-louis.students-laplateforme.io/" class="flex items-center font-semibold hover:text-[#7a1ea1] transition duration-100">
+                    <a href="https://jules-jean-louis.students-laplateforme.io/" class="flex items-center font-semibold hover:text-[#ac1de4] transition duration-100">
                         <span>Contact</span>
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="https://jules-jean-louis.students-laplateforme.io/Projet/index.php" class="flex items-center font-semibold hover:text-[#7a1ea1] transition duration-100">
+                    <a href="https://jules-jean-louis.students-laplateforme.io/Projet/index.php" class="flex items-center font-semibold hover:text-[#ac1de4] transition duration-100">
                         <span>Projets</span>
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -110,7 +110,7 @@
                 <div>
             <?php else : ?>
                 <div>
-                    <button id="login_register_header_btn" class="py-1.5 bg-[#edf0f7] border-[#ac1de4] px-4 rounded text-white" type="button">
+                    <button id="login_register_header_btn" class="py-1.5 bg-[#ac1de4] border-[#ac1de4]  hover:drop-shadow-[0_20px_20px_rgba(172,29,228,0.30)] font-bold px-4 rounded text-white" type="button">
                         Connexion
                     </button>
                 </div>

@@ -19,6 +19,6 @@
         <div id="errorDisplay" class="w-full"></div>
     </div>
     <div id="containerSubmit" class="w-full">
-        <button type="submit" name="submit" id="submit" class="p-2 rounded bg-[#a87ee6] font-semibold text-white w-full">Connexion</button>
+        <button type="submit" name="submit" id="submit" class="p-2 rounded bg-[#ac1de4] border-[#ac1de4]  hover:drop-shadow-[0_20px_20px_rgba(172,29,228,0.30)] font-semibold text-white w-full">Connexion</button>
     </div>
 </form>

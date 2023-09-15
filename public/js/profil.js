@@ -74,42 +74,45 @@ editProfil.addEventListener('submit', async (e) => {
         const display = document.querySelector('#errorDisplay');
         if (data.username) {
             username.classList.add('is-invalid');
-            showError(usernameSmall, data.username);
+            showError('errorUsername', data.username);
         }
         if (data.email) {
             email.classList.add('is-invalid');
-            showError(emailSmall, data.email);
+            showError('errorEmail', data.email);
         }
         if (data.firstname) {
             firstname.classList.add('is-invalid');
-            showError(firstnameSmall, data.firstname);
+            showError('errorFirstname', data.firstname);
         }
         if (data.lastname) {
             lastname.classList.add('is-invalid');
-            showError(lastnameSmall, data.lastname);
+            showError('errorLastname', data.lastname);
         }
         if (data.password) {
             password.classList.add('is-invalid');
-            showError(passwordSmall, data.password);
+            showError('errorPassword', data.password);
         }
-        if (data.passwordConfirm) {
+        if (data.passwordConfirm || data.error_password) {
             passwordConfirm.classList.add('is-invalid');
-            showError(passwordConfirmSmall, data.passwordConfirm);
+            showError('errorPasswordConfirm', data.passwordConfirm);
         }
         if (data.bio) {
             bio.classList.add('is-invalid');
-            showError(bioSmall, data.bio);
+            showError('errorPasswordConfirm', data.bio);
         }
         if (data.success) {
             const success = data.success;
-            success.forEach(success => {
-                display.innerHTML += `
-                    <p class="text-center">${success}</p>`;
-                setTimeout(() => {
-                    display.innerHTML = '';
-                    displayUserInfo();
-                }, 5000);
-            })
+            for (const key in success) {
+                if (success.hasOwnProperty(key)) {
+                    const message = success[key];
+                    display.innerHTML += `
+                <p class="text-center">${message}</p>`;
+                }
+            }
+            setTimeout(() => {
+                display.innerHTML = '';
+                displayUserInfo();
+            }, 5000);
         }
         if (data.length === 0) {
             display.innerHTML = `

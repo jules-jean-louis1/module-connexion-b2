@@ -58,7 +58,7 @@ function createDialog()
     const containerForm = document.querySelector('#containerFormLoginRegister');
     const dialog = document.createElement("dialog");
     dialog.setAttribute("id", "dialog");
-    dialog.setAttribute("class", "w-[28.25rem] h-[62%] bg-white border-[1px] border-[#a8b3cf33] rounded-[14px] shadow-lg z-50");
+    dialog.setAttribute("class", "w-[28.25rem] h-[64%] bg-white border-[1px] border-[#a8b3cf33] rounded-[14px] shadow-lg z-50");
     dialog.innerHTML = '';
 
     const divBottom = document.createElement("div");
@@ -101,6 +101,11 @@ function createDialog()
     containerForm.appendChild(dialog);
 }
 
+/* Reset Error Message */
+export function resetError(selector) {
+    const small = document.getElementById(selector);
+    small.innerHTML = '';
+}
 
 
 
@@ -119,7 +124,7 @@ export async function loginRegisterForm(btnLogin)
         const buttonLogin = document.querySelector('#buttonLogin');
         const ParaModifyText = document.getElementById("ParaModifyText");
         const TextchangeLogin = document.getElementById("TextchangeLogin");
-        dialogModal_Overlay.classList.add('dialogModal_Overlay');
+        dialogModal_Overlay.classList.add('bg-overlay-quaternary-onion');
         /* Récupere le formulaire de connexion */
         async function Login() {
             const responseLogin = await fetch(`${window.location.origin}/moduleconnexionb2/login`);
@@ -128,6 +133,9 @@ export async function loginRegisterForm(btnLogin)
             containerDiv.innerHTML = dataLogin;
             TextchangeLogin.textContent = "Vous n'avez pas de compte ?";
             buttonLogin.textContent = "S'inscrire";
+
+            dialog.classList.remove('h-[64%]');
+            dialog.classList.add('h-[50%]');
             // Animation Label
             const inputLogin = document.querySelector('#email');
             const inputPassword = document.querySelector('#password');
@@ -145,6 +153,10 @@ export async function loginRegisterForm(btnLogin)
                     const data = await response.json();
                     console.log(data);
                     const errorDisplay = document.getElementById('errorDisplay');
+                    errorDisplay.innerHTML = '';
+                    resetError('errorEmail');
+                    resetError('errorPassword');
+
                     if (data.email) {
                         showError('errorEmail', data.email);
                     }
@@ -187,6 +199,9 @@ export async function loginRegisterForm(btnLogin)
             containerDiv.innerHTML = dataRegister;
             TextchangeLogin.textContent = "Vous avez déjà un compte ?";
             buttonLogin.textContent = "Se connecter";
+
+            dialog.classList.remove('h-[50%]');
+            dialog.classList.add('h-[64%]');
             // Animation Label
             const inputUsername = document.querySelector('#username');
             const inputEmail = document.querySelector('#email');
@@ -213,6 +228,14 @@ export async function loginRegisterForm(btnLogin)
                     const data = await response.json();
 
                     const errorDisplay = document.getElementById('errorDisplay');
+                    errorDisplay.innerHTML = '';
+                    resetError('errorEmail');
+                    resetError('errorUsername');
+                    resetError('errorPassword');
+                    resetError('errorPasswordConfirm');
+                    resetError('errorFirstname');
+                    resetError('errorLastname');
+
                     if (data.email) {
                         showError('errorEmail', data.email);
                     }
@@ -286,7 +309,7 @@ export async function loginRegisterForm(btnLogin)
         const buttonClose = document.querySelector('#buttonClose');
         buttonClose.addEventListener('click', () => {
             dialog.close();
-            dialogModal_Overlay.classList.remove('dialogModal_Overlay');
+            dialogModal_Overlay.classList.remove('bg-overlay-quaternary-onion');
         });
     });
 }

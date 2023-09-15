@@ -45,7 +45,7 @@
     <div>
         <div id="errorDisplay" class="h-20"></div>
     </div>
-    <button type="submit" class="p-2 bg-amber-400 rounded">
+    <button type="submit" class="p-2 bg-[#0e1217] border-[#0e1217]  hover:drop-shadow-[0_5px_5px_rgba(0,0,0,0.30)] rounded text-white font-bold">
         Créer un compte
     </button>
 </form>
