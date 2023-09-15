@@ -1,8 +1,5 @@
 <?php if ($_SESSION['user']['role'] === 'admin') : ?>
 
-<?php
-
-?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -13,7 +10,8 @@
     <script defer type="module" src="./public/js/admin.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./public/css/home.css">
-    <title>admin</title>
+    <link rel="icon" href="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/moduleconnexionb2/public/icones/logo_module.jpg'; ?>">
+    <title>Dashboard - Module.co</title>
 </head>
 <body>
 <header>

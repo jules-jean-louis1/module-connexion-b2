@@ -5,9 +5,10 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script defer type="module" src="/public/js/profil.js"></script>
+    <script defer type="module" src="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/moduleconnexionb2/public/js/profil.js';?>"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./public/css/home.css">
+    <link rel="stylesheet" href="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/moduleconnexionb2/public/css/home.css';?>">
+    <link rel="icon" href="./public/icones/logo-1.png" type="image/x-icon">
     <title>Profil</title>
 </head>
 <body>
@@ -28,7 +29,7 @@
             <div class="w-1/2">
                 <div class="flex items-start space-x-2.5 justify-center py-4">
                     <div class="w-32 h-32 rounded-full bg-gray-400 flex items-center justify-center">
-                        <img src="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/moduleconnexionb2/public/images/avatars/' . $_SESSION['user']['avatar'];?>" alt="avatar" class="w-full h-full object-cover rounded-full">
+                        <img src="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/moduleconnexionb2/public/images/avatars/' . $_SESSION['user']['avatar'];?>" alt="avatar" class="w-full h-full object-cover rounded-full">
                     </div>
                     <div>
                         <h2 class="text-2xl font-bold mt-2" id="username_top"><?php echo $_SESSION['user']['username'];?></h2>

@@ -8,6 +8,7 @@
     <script defer type="module" src="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/moduleconnexionb2/public/js/home.js';?>"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/moduleconnexionb2/public/css/home.css';?>">
+    <link rel="icon" href="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/moduleconnexionb2/public/icones/logo_module.jpg'; ?>">
     <title>Module.co</title>
 </head>
 <body>

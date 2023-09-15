@@ -2,7 +2,7 @@
     <div>
         <div>
             <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
-                <input type="text" name="email" id="email" placeholder="Nom d'utilisateur / Email" class="bg-transparent text-black focus:outline-none">
+                <input type="text" name="email" id="email" placeholder="Nom d'utilisateur / Email" class="bg-transparent text-black focus:outline-none w-full">
             </div>
             <small id="errorEmail"></small>
         </div>
@@ -10,7 +10,7 @@
     <div>
         <div>
             <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
-                <input type="password" name="password" id="password" placeholder="Mot de passe" class="bg-transparent text-black focus:outline-none">
+                <input type="password" name="password" id="password" placeholder="Mot de passe" class="bg-transparent text-black focus:outline-none w-full">
             </div>
             <small id="errorPassword"></small>
         </div>

@@ -1,4 +1,4 @@
-import {handleMenu, addLabelOnFocus, showError, showSuccess, convertDate, mobileMenu} from "./function/function";
+import {handleMenu, addLabelOnFocus, showError, showSuccess, convertDate, mobileMenu} from "./function/function.js";
 
 const btnConnected = document.querySelector('#btnActionUser');
 

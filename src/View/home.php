@@ -8,7 +8,8 @@
     <script defer type="module" src="./public/js/home.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./public/css/home.css">
-    <title>Module.co</title>
+    <link rel="icon" href="./public/icones/logo-1.png" type="image/x-icon">
+    <title>Module.co - Accueil</title>
 </head>
 <body>
     <header>

@@ -2,13 +2,13 @@
     <div>
         <div>
             <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
-                <input type="text" name="username" id="username" placeholder="Nom d'utilisateur" class="bg-transparent text-black focus:outline-none">
+                <input type="text" name="username" id="username" placeholder="Nom d'utilisateur" class="bg-transparent text-black focus:outline-none w-full">
             </div>
             <small id="errorUsername"></small>
         </div>
         <div>
             <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
-                <input type="email" name="email" id="email" placeholder="Email" class="bg-transparent text-black focus:outline-none">
+                <input type="email" name="email" id="email" placeholder="Email" class="bg-transparent text-black focus:outline-none w-full">
             </div>
             <small id="errorEmail"></small>
         </div>
@@ -31,13 +31,13 @@
     <div>
         <div>
             <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
-                <input type="password" name="password" id="password" placeholder="Mot de passe" class="bg-transparent text-black focus:outline-none">
+                <input type="password" name="password" id="password" placeholder="Mot de passe" class="bg-transparent text-black focus:outline-none w-full">
             </div>
             <small id="errorPassword"></small>
         </div>
         <div>
             <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
-                <input type="password" name="passwordConfirm" id="passwordConfirm" placeholder="Confirmer le mot de passe" class="bg-transparent text-black focus:outline-none">
+                <input type="password" name="passwordConfirm" id="passwordConfirm" placeholder="Confirmer le mot de passe" class="bg-transparent text-black focus:outline-none w-full">
             </div>
             <small id="errorPasswordConfirm"></small>
         </div>
