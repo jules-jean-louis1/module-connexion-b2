@@ -17,6 +17,9 @@
     <main class="h-[92vh]">
         <div id="containerFormLoginRegister"></div>
         <div id="dialogModal_Overlay"></div>
+        <section class="clock_midle">
+            <div id="clock" class="text-4xl p-3 border rounded border-[#ac1de4]  hover:drop-shadow-[0_20px_20px_rgba(172,29,228,0.30)] font-bold px-4"></div>
+        </section>
         <section id="mainContainerHome" class="flex justify-between h-full">
             <div id="left90degresponsive" class="flex items-center">
                 <h3 class="text-4xl uppercase">Homepage</h3>

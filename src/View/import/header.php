@@ -115,6 +115,7 @@
                     </button>
                 </div>
             <?php endif; ?>
+                </div>
         </div>
     </nav>
 </div>
@@ -144,48 +145,91 @@
     </nav>
     <div class="hidden" id="menuDisplay">
         <div class="bg-white absolute top-[54.5px] left-0 w-screen h-screen">
-            <div>
-                <button id="closeMenuMobile">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-letter-x w-20 h-20" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M7 4l10 16"/>
-                        <path d="M17 4l-10 16"/>
-                    </svg>
-                </button>
+            <div class="flex justify-center">
+                <?php if (isset($_SESSION['user'])): ?>
+                    <button id="btnActionUser" class="py-1.5 bg-[#edf0f7] border border-[#ac1de4] px-4 rounded text-[#0e1217]">
+                        <div class="flex items-center space-x-2">
+                            <img src="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/moduleconnexionb2/public/images/avatars/' . $_SESSION['user']['avatar']; ?>" alt="avatar" class="w-6 h-6 rounded">
+                            <p class="font-bold"><?=$_SESSION['user']['username'];?></p>
+                        </div>
+                    </button>
+                    <a href="<?='http://'.$_SERVER['HTTP_HOST'].'/moduleconnexionb2/profil/'.$_SESSION['user']['id']; ?>" class="flex justify-between">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"/>
+                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/>
+                        </svg>
+                    </span>
+                        <span>Profil</span>
+                    </a>
+                    <a href="<?='http://'.$_SERVER['HTTP_HOST'].'/moduleconnexionb2/logout'; ?>" class="flex justify-between">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M10 8v-2a2 2 0 0 1 2 -2h7a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-2"/>
+                            <path d="M15 12h-12l3 -3"/>
+                            <path d="M6 15l-3 -3"/>
+                        </svg>
+                    </span>
+                        <span>Déconnexion</span>
+                    </a>
+                    <?php if ($_SESSION['user']['role'] === 'admin') : ?>
+                        <a href="<?='http://'.$_SERVER['HTTP_HOST'].'/moduleconnexionb2/admin'; ?>" class="flex justify-between">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-dashboard" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M12 13m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/>
+                            <path d="M13.45 11.55l2.05 -2.05"/>
+                            <path d="M6.4 20a9 9 0 1 1 11.2 0z"/>
+                        </svg>
+                    </span>
+                            <span>Admin</span>
+                        </a>
+                    <?php endif; ?>
+                <?php else : ?>
+                    <div class="pt-6">
+                        <button id="login_register_header_btn_menuMobile" class="py-1.5 bg-[#ac1de4] border-[#ac1de4] text-3xl hover:drop-shadow-[0_20px_20px_rgba(172,29,228,0.30)] font-bold px-4 rounded text-white" type="button">
+                            Connexion
+                        </button>
+                    </div>
+                <?php endif; ?>
             </div>
-            <ul class="flex flex-col text-6xl uppercase items-center justify-around h-1/2 ">
-                <li class="border-b border-[#52586633] w-full text-center py-3">
-                    <a href="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/moduleconnexionb2/docs'; ?>" class="font-semibold hover:text-[#ac1de4] transition duration-100">
-                        Docs
-                    </a>
-                </li>
-                <li class="flex justify-center border-b border-[#52586633] w-full text-center py-3">
-                    <a href="https://jules-jean-louis.students-laplateforme.io/" class="flex items-center font-semibold hover:text-[#ac1de4] transition duration-100">
-                        <span>Contact</span>
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"/>
-                                <path d="M11 13l9 -9"/>
-                                <path d="M15 4h5v5"/>
-                            </svg>
-                        </span>
-                    </a>
-                </li>
-                <li class="flex justify-center border-b border-[#52586633] w-full text-center py-3">
-                    <a href="https://jules-jean-louis.students-laplateforme.io/Projet/index.php" class="flex items-center font-semibold hover:text-[#ac1de4] transition duration-100">
-                        <span>Projets</span>
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"/>
-                                <path d="M11 13l9 -9"/>
-                                <path d="M15 4h5v5"/>
-                            </svg>
-                        </span>
-                    </a>
-                </li>
-            </ul>
+            <div>
+                <ul class="flex flex-col text-6xl uppercase items-center justify-around h-1/2 ">
+                    <li class="border-b border-[#52586633] w-full text-center py-3">
+                        <a href="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/moduleconnexionb2/docs'; ?>" class="font-semibold hover:text-[#ac1de4] transition duration-100">
+                            Docs
+                        </a>
+                    </li>
+                    <li class="flex justify-center border-b border-[#52586633] w-full text-center py-3">
+                        <a href="https://jules-jean-louis.students-laplateforme.io/" class="flex items-center font-semibold hover:text-[#ac1de4] transition duration-100">
+                            <span>Contact</span>
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"/>
+                                    <path d="M11 13l9 -9"/>
+                                    <path d="M15 4h5v5"/>
+                                </svg>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="flex justify-center border-b border-[#52586633] w-full text-center py-3">
+                        <a href="https://jules-jean-louis.students-laplateforme.io/Projet/index.php" class="flex items-center font-semibold hover:text-[#ac1de4] transition duration-100">
+                            <span>Projets</span>
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"/>
+                                    <path d="M11 13l9 -9"/>
+                                    <path d="M15 4h5v5"/>
+                                </svg>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

@@ -18,6 +18,12 @@
     top: 45%;
     transform: translate(-50%, -50%);
 }
+.clock_midle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
 .playfair_display {
     font-family: 'Rajdhani', sans-serif;

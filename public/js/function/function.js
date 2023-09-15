@@ -329,9 +329,18 @@ export function mobileMenu() {
         const menu = document.querySelector('#menuDisplay');
         menu.classList.toggle('hidden');
     });
-    const btnCloseMenu = document.querySelector('#closeMenuMobile');
-    btnCloseMenu.addEventListener('click', () => {
-        const menu = document.querySelector('#menuDisplay');
-        menu.classList.toggle('hidden');
-    });
+}
+
+export function horloge() {
+    function updateClock() {
+        const now = new Date();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+        document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+    // Mettre à jour l'horloge chaque seconde
+    setInterval(updateClock, 1000);
+    // Mettre à jour l'horloge immédiatement lors du chargement de la page
+    updateClock();
 }
