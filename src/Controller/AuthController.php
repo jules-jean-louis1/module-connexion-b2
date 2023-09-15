@@ -4,6 +4,11 @@ namespace App\Controller;
 use App\Model\AuthModel;
 class AuthController extends AbstractClasses\AbstractUserController
 {
+    private AuthModel $authModel;
+    public function __construct()
+    {
+        $this->authModel = new AuthModel();
+    }
     public function ValidUsername(string $username): bool
     {
         if (strlen($username) < 3 || strlen($username) > 20) {
@@ -62,13 +67,12 @@ class AuthController extends AbstractClasses\AbstractUserController
         $password_confirm = $this->verifyField('passwordConfirm');
 
         $errors = [];
-        $user = new AuthModel();
 
         if (!$username){
             $errors['username'] = 'Veuillez indiquer votre Nom d\'utilisateur.';
         } elseif (!$this->ValidUsername($username)) {
             $errors['username'] = 'Le champ username doit contenir entre 3 et 20 caractères et ne doit pas contenir de caractères spéciaux';
-        } elseif ($user->VerifyIfUsernameExist($username)) {
+        } elseif ($this->authModel->VerifyIfUsernameExist($username)) {
             $errors['username'] = 'Ce nom d\'utlisateur est déjà utilisé';
             $errors['useUsername'] = 'Ce nom d\'utlisateur est déjà utilisé';
         }
@@ -76,7 +80,7 @@ class AuthController extends AbstractClasses\AbstractUserController
             $errors['email'] = 'Veuillez indiquer votre adresse e-mail.';
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = 'Veuillez indiquer votre adresse e-mail valide.';
-        } elseif ($user->VerifyIfExist($email, 'email')) {
+        } elseif ($this->authModel->VerifyIfExist($email, 'email')) {
             $errors['email'] = 'Cette email est déjà utilisé.';
             $errors['useEmail'] = 'Cette email est déjà utilisé.';
         }
@@ -103,9 +107,9 @@ class AuthController extends AbstractClasses\AbstractUserController
             $errors['passwordConfirm'] = 'Le deux mot de passe ne sont pas identiques';
         }
         if (empty($errors)) {
-            if ($user->VerifyIfUsernameExist($username)) {
+            if ($this->authModel->VerifyIfUsernameExist($username)) {
                 $errors['useUsername'] = 'Ce nom d\'utlisateur est déjà utilisé';
-            } elseif ($user->VerifyIfExist($email, 'email')) {
+            } elseif ($this->authModel->VerifyIfExist($email, 'email')) {
                 $errors['useEmail'] = 'Cette email est déjà utilisé';
             } else {
                 // Nettoyer les données
@@ -119,7 +123,7 @@ class AuthController extends AbstractClasses\AbstractUserController
                 $avatar = $this->generateAvatarImage($firstLetter, $backgroundColor, $username);
                 // Ajouter l'utilisateur dans la base de données
 
-                $user->register($username, $email, $firstname, $lastname, $password, $avatar);
+                $this->authModel->register($username, $email, $firstname, $lastname, $password, $avatar);
                 $errors['success'] = 'Votre compte a bien été créé';
             }
             echo json_encode($errors);
@@ -135,7 +139,6 @@ class AuthController extends AbstractClasses\AbstractUserController
         $email = $this->verifyField('email');
         $password = $this->verifyField('password');
         $errors = [];
-        $user = new AuthModel();
 
         if (!$email) {
             $errors['email'] = 'Le champ email est requis';
@@ -146,8 +149,8 @@ class AuthController extends AbstractClasses\AbstractUserController
         if (empty($errors)) {
             $email = $this->ValidFieldForm($email);
             $password = $this->ValidFieldForm($password);
-            $user->login($email, $password);
-            if ($user->login($email, $password)) {
+            $this->authModel->login($email, $password);
+            if ($this->authModel->login($email, $password)) {
                 $errors['success'] = 'Vous êtes connecté';
             } else {
                 $errors['error'] = 'Email ou mot de passe incorrect';

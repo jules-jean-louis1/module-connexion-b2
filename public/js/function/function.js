@@ -257,11 +257,9 @@ export async function loginRegisterForm(btnLogin)
                     if (data.success) {
                         errorDisplay.innerHTML = '';
                         errorDisplay.innerHTML = `
-                        <div role="alert" class="flex p-3 border border-[#000000] border-l-4 flex-row border-l-[#FF0100] rounded-[16px] mt-6">
-                            <span class="block sm:inline">
-                                <svg width="1em" height="1em" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 pointer-events-none mr-2 text-theme-status-error"><defs><clipPath id="outlined_svg__a"><path fill="currentcolor" d="M11.541.514a4 4 0 011.4 1.317l.126.209 5.58 9.92a4 4 0 01-3.23 5.953l-.256.008H4a4 4 0 01-3.605-5.733l.119-.228 5.58-9.92A4 4 0 0111.541.514zM7.92 2.887l-.082.133-5.58 9.92a2 2 0 001.594 2.976L4 15.92h11.16a2 2 0 001.815-2.841l-.071-.14-5.58-9.92a2 2 0 00-3.405-.133zM9.58 11.92a1 1 0 110 2 1 1 0 010-2zm0-7a1 1 0 011 1v4a1 1 0 11-2 0v-4a1 1 0 011-1z"></path></clipPath></defs><g clip-path="url(#outlined_svg__a)" fill="currentcolor" transform="translate(2.42 3.079)"><path d="M0 0h19.161v17.921H0V0z"></path></g></svg>
-                            </span>
-                            <p class="flex-1 !mt-0 typo-callout mt-3">${data.success}</p>
+                        <div class="w-full flex items-center py-3 px-2 space-x-3 bg-opacity-50 backdrop-filter backdrop-blur-lg hover:bg-opacity-75 hover:saturate-100 rounded-[14px] bg-[#cbf4f0] text-[#000] border-l-[3px] border-[#23a094]">
+                            <svg width="25" height="25" viewBox="0 0 24 24" stroke="#23a094" fill="#fff" class="p-0.5 bg-white items-center rounded-full" stroke-linejoin="round" stroke-width="1.736842105263158" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg"><path d="M16.253 10.1109L11.8891 14.4749C11.4986 14.8654 10.8654 14.8654 10.4749 14.4749L7.99999 12M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"></path></svg>
+                            <p class="text-lg">${data.success}</p>
                         </div>`;
                         setTimeout(() => {
                             Login();

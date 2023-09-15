@@ -4,23 +4,19 @@ namespace App\Controller;
 use App\Model\UserModel;
 class UserController extends AbstractClasses\AbstractUserController
 {
+    private UserModel $userModel;
+    public function __construct()
+    {
+        $this->userModel = new UserModel();
+    }
     public function getUserInfo(int $id): void
     {
         $userModel = new UserModel();
         $user = $userModel->getUserInfo($id);
         echo json_encode($user);
     }
-    public function cleanField(string $field): string
+    public function editUserInfo(int $id): void
     {
-        $field = trim($field);
-        $field = htmlspecialchars($field);
-
-        return $field;
-    }
-    public function editUserInfo(int $id)
-    {
-        $userModel = new UserModel();
-
         $errors = [];
         $success = [];
         $username = $this->verifyField('username');
@@ -43,7 +39,7 @@ class UserController extends AbstractClasses\AbstractUserController
                     $errors['username'] = 'Veuillez renseigner un nom d\'utilisateur.';
                 } elseif (strlen($username) <= 2 || strlen($username) >= 20) {
                     $errors['username'] = 'Votre nom d\'utilisateur doit contenir entre 3 et 20 caractères.';
-                } elseif ($userModel->VerifyIfExist($username, 'username')) {
+                } elseif ($this->userModel->VerifyIfExist($username, 'username')) {
                     $errors['username'] = 'Ce nom d\'utilisateur est déjà utilisé.';
                 } else {
                     $crtl_username = $_POST['username'];
@@ -56,7 +52,7 @@ class UserController extends AbstractClasses\AbstractUserController
                     $errors['email'] = 'Veuillez renseigner une adresse e-mail.';
                 } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     $errors['email'] = 'Veuillez renseigner une adresse e-mail valide.';
-                } elseif ($userModel->VerifyIfExist($email, 'email')) {
+                } elseif ($this->userModel->VerifyIfExist($email, 'email')) {
                     $errors['email'] = 'Cette adresse e-mail est déjà utilisée.';
                 } else {
                     $crtl_email = $_POST['email'];
@@ -116,34 +112,34 @@ class UserController extends AbstractClasses\AbstractUserController
 
         if (empty($errors)) {
             if ($crtl_username !== null) {
-                $userModel->editInfoUser('username', $crtl_username, $id);
+                $this->userModel->editInfoUser('username', $crtl_username, $id);
                 $_SESSION['user']['username'] = $crtl_username;
                 $success['success']['username'] = 'Votre nom d\'utilisateur a bien été modifié.';
             }
             if ($crtl_email !== null) {
-                $userModel->editInfoUser('email', $crtl_email, $id);
+                $this->userModel->editInfoUser('email', $crtl_email, $id);
                 $_SESSION['user']['email'] = $crtl_email;
                 $success['success']['email'] = 'Votre adresse e-mail a bien été modifiée.';
             }
             if ($crtl_firstname !== null) {
-                $userModel->editInfoUser('firstname', $crtl_firstname, $id);
+                $this->userModel->editInfoUser('firstname', $crtl_firstname, $id);
                 $_SESSION['user']['firstname'] = $crtl_firstname;
                 $success['success']['firstname'] = 'Votre prénom a bien été modifié.';
             }
             if ($crtl_lastname !== null) {
-                $userModel->editInfoUser('lastname', $crtl_lastname, $id);
+                $this->userModel->editInfoUser('lastname', $crtl_lastname, $id);
                 $_SESSION['user']['lastname'] = $crtl_lastname;
                 $success['success']['lastname'] = 'Votre nom a bien été modifié.';
             }
             if ($crtl_bio !== null) {
-                $userModel->editInfoUser('bio', $crtl_bio, $id);
+                $this->userModel->editInfoUser('bio', $crtl_bio, $id);
                 $_SESSION['user']['bio'] = $crtl_bio;
                 $success['success']['bio'] = 'Votre biographie a bien été modifiée.';
             }
             if (!empty($password) && !empty($passwordConfirm)) {
-                if ($userModel->VerifyPassword($password, $id)) {
+                if ($this->userModel->VerifyPassword($password, $id)) {
                     $password = password_hash($password, PASSWORD_DEFAULT);
-                    $userModel->editInfoUser('password', $password, $id);
+                    $this->userModel->editInfoUser('password', $password, $id);
                     $success['success']['password'] = 'Votre mot de passe a bien été modifié.';
                 } else {
                     $success['error_password'] = 'Votre mot de passe n\'a pas été modifié.';
@@ -154,9 +150,8 @@ class UserController extends AbstractClasses\AbstractUserController
     }
     private function editUser($crtl, $field, $id)
     {
-        $userModel = new UserModel();
         if ($crtl !== null) {
-            $userModel->editInfoUser($field, $crtl, $id);
+            $this->userModel->editInfoUser($field, $crtl, $id);
             $_SESSION['user'][$field] = $crtl;
         }
     }
