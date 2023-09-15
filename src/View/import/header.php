@@ -51,7 +51,7 @@
         <div id="containerBtnActionUser">
             <?php if (isset($_SESSION['user'])) : ?>
                 <div class="relative">
-                    <button id="btnActionUser" class="py-1.5 bg-[#f5f8fc] border border-[#52586633] px-4 rounded text-[#0e1217]">
+                    <button id="btnActionUser" class="py-1.5 bg-[#edf0f7] border border-[#ac1de4] px-4 rounded text-[#0e1217]">
                         <div class="flex items-center space-x-2">
                             <img src="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/moduleconnexionb2/public/images/avatars/' . $_SESSION['user']['avatar']; ?>" alt="avatar" class="w-6 h-6 rounded">
                             <p class="font-bold"><?=$_SESSION['user']['username'];?></p>
@@ -110,7 +110,7 @@
                 <div>
             <?php else : ?>
                 <div>
-                    <button id="login_register_header_btn" class="py-1.5 bg-gray-400 border-[#a8b3cf33] px-4 rounded text-white" type="button">
+                    <button id="login_register_header_btn" class="py-1.5 bg-[#edf0f7] border-[#ac1de4] px-4 rounded text-white" type="button">
                         Connexion
                     </button>
                 </div>

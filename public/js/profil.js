@@ -1,4 +1,4 @@
-import {handleMenu, addLabelOnFocus, showError} from "./function/function";
+import {handleMenu, addLabelOnFocus, showError, convertDate} from "./function/function";
 
 const btnConnected = document.querySelector('#btnActionUser');
 
@@ -26,6 +26,12 @@ const bioSmall = document.querySelector('#errorBio');
 
 const editProfil = document.querySelector('#editProfil');
 
+
+const titlePage = document.querySelector('title');
+const username_top = document.querySelector('#username_top');
+const role_top = document.querySelector('#role_top');
+const joined_top = document.querySelector('#joined_top');
+
 // Obtenez l'URL actuelle
 const url = window.location.href;
 let segments = url.split('/');
@@ -35,17 +41,22 @@ const id = segments[idIndex];
 // Display Label
 
 async function getUserInfos(id) {
-    const response = await fetch(`${window.location.origin}/moduleconnexionb2/profil/${id}/info`);
+    const response = await fetch(`/moduleconnexionb2/profil/${id}/info`);
     return await response.json();
 }
 
 function displayUserInfo() {
     getUserInfos(id).then(user => {
         username.value = user[0].username;
+        titlePage.innerHTML = `${user[0].username} - Profil`;
         email.value = user[0].email;
         firstname.value = user[0].firstname;
         lastname.value = user[0].lastname;
         bio.value = user[0].bio;
+
+        username_top.innerHTML = user[0].username;
+        role_top.innerHTML = user[0].role === 'admin' ? 'Administrateur' : 'Utilisateur';
+        joined_top.innerHTML = 'Inscrit le ' + convertDate(user[0].created_at);
     });
 }
 
@@ -55,7 +66,7 @@ displayUserInfo();
 editProfil.addEventListener('submit', async (e) => {
     e.preventDefault();
     try {
-        const response = await fetch(`${window.location.origin}/moduleconnexionb2/profil/${id}/edit`, {
+        const response = await fetch(`/moduleconnexionb2/profil/${id}/edit`, {
             method: 'POST',
             body: new FormData(editProfil)})
         const data = await response.json();
@@ -100,7 +111,16 @@ editProfil.addEventListener('submit', async (e) => {
                 }, 5000);
             })
         }
+        if (data.length === 0) {
+            display.innerHTML = `
+                    <p class="text-center">Aucune modification n'a été apporté</p>`;
+            setTimeout(() => {
+                display.innerHTML = '';
+            }, 5000);
+        }
     } catch (error) {
         console.log(error);
     }
 });
+
+// add profile informations

@@ -14,10 +14,31 @@
 <header>
     <?php require_once 'src/View/import/header.php'; ?>
 </header>
-<main>
+<main class="h-full">
     <div id="containerFormLoginRegister"></div>
     <div id="dialogModal_Overlay"></div>
-    <h1>Profil</h1>
+    <section id="mainContainerHome" class="flex justify-between h-full">
+        <div id="left90degresponsive_profil" class="flex items-center">
+            <h3 class="text-4xl uppercase">Profil</h3>
+            <div class="w-10 bg-gray-600" id="barre_dialog_profil"></div>
+        </div>
+    </section>
+    <article>
+        <section class="flex justify-center">
+            <div class="w-1/2">
+                <div class="flex items-start space-x-2.5 justify-center py-4">
+                    <div class="w-32 h-32 rounded-full bg-gray-400 flex items-center justify-center">
+                        <img src="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/moduleconnexionb2/public/images/avatars/' . $_SESSION['user']['avatar'];?>" alt="avatar" class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold mt-2" id="username_top"><?php echo $_SESSION['user']['username'];?></h2>
+                        <p class="text-sm text-gray-500" id="role_top"><?php echo $_SESSION['user']['role'];?></p>
+                        <p class="text-sm text-gray-500" id="joined_top"><?php echo $_SESSION['user']['email'];?></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
     <article class="flex justify-center">
         <section class="w-1/2 flex flex-col">
         <div class="w-full">
@@ -54,6 +75,7 @@
                         <div>
                             <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
                                 <input name="lastname" id="lastname" class="bg-transparent text-black focus:outline-none">
+                                <label for="lastname" class="absolute top-0 left-2 px-1 py-px text-xs text-gray-500">Nom</label>
                             </div>
                             <small id="errorLastname"></small>
                         </div>
@@ -81,16 +103,16 @@
                 </div>
                 <div>
                     <div>
-                        <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-12 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
-                            <textarea name="bio" id="bio" class="bg-transparent text-black focus:outline-none" maxlength="300" rows="5"></textarea>
+                        <div class="form_control flex relative rounded-14 flex-row items-center bg-[#a8b3cf14] h-24 px-4 overflow-hidden border-2 border-[#000] rounded cursor-text">
+                            <textarea name="bio" id="bio" class="bg-transparent text-black focus:outline-none w-full" maxlength="300"></textarea>
                             <label for="bio" class="absolute top-0 left-2 px-1 py-px text-xs text-gray-500">Biographie</label>
                         </div>
                         <small id="errorBio"></small>
                     </div>
                 </div>
                 <div class="h-16" id="errorDisplay"></div>
-                <button type="submit" class="px-1.5 py-2 rounded bg-gray-400 font-bold">
-                    Modifier
+                <button type="submit" class="px-1.5 py-2 rounded bg-[#ac1de4] hover:bg-[#9e15d9] hover:drop-shadow-[0_20px_20px_rgba(172,29,228,0.30)] font-bold text-white">
+                    Sauvegarder vos modifications
                 </button>
             </form>
         </div>

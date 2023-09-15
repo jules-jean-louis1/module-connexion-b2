@@ -71,3 +71,16 @@
     bottom: 462px;
     left: -404px;
 }
+#left90degresponsive_profil {
+    rotate: 270deg;
+    position: absolute;
+    bottom: 450px;
+    left: -391px;
+}
+#barre_dialog_profil {
+    height: 10px;
+    background: #2f2f2f;
+    width: 754px;
+    margin-left: 12px;
+    border-radius: 2px;
+}
