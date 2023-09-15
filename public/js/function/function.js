@@ -322,3 +322,16 @@ export function convertDate(timestamp) {
     const day = date.getDate();
     return `${day} ${month} ${year}`;
 }
+
+export function mobileMenu() {
+    const btnMenu = document.querySelector('#btnMenuMobile');
+    btnMenu.addEventListener('click', () => {
+        const menu = document.querySelector('#menuDisplay');
+        menu.classList.toggle('hidden');
+    });
+    const btnCloseMenu = document.querySelector('#closeMenuMobile');
+    btnCloseMenu.addEventListener('click', () => {
+        const menu = document.querySelector('#menuDisplay');
+        menu.classList.toggle('hidden');
+    });
+}

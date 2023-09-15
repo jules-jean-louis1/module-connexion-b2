@@ -1,10 +1,11 @@
-import {handleMenu, addLabelOnFocus, showError, convertDate} from "./function/function";
+import {handleMenu, addLabelOnFocus, showError, convertDate, mobileMenu} from "./function/function";
 
 const btnConnected = document.querySelector('#btnActionUser');
 
 if (btnConnected) {
     handleMenu();
 }
+mobileMenu();
 
 // Declare variables
 const username = document.querySelector('#username');
