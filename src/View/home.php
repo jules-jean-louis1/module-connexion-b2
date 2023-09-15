@@ -24,8 +24,8 @@
             </div>
             <div class="flex items-end" id="title_Homepage">
                 <div id="bottomPageTitle" class="flex flex-col items-end playfair_display">
-                    <div class="font-bold uppercase text-[9rem] lg:-mt-6 lg:-mb-9">module</div>
-                    <div class="font-bold uppercase text-[9rem] lg:-mt-6 lg:-mb-9">de connexion</div>
+                    <div class="font-bold uppercase lg:text-[9rem] text-[3rem] mb:text-[4rem] lg:-mt-6 lg:-mb-9">module</div>
+                    <div class="font-bold uppercase lg:text-[9rem]  text-[3rem] mb:text-[4rem] lg:-mt-6 lg:-mb-9">de connexion</div>
                 </div>
             </div>
         </section>

@@ -45,6 +45,7 @@
     position: absolute;
     bottom: 465px;
     left: -389px;
+    z-index: auto;
 }
 #barre_dialog {
     height: 10px;
