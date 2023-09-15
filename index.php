@@ -30,9 +30,6 @@ $router->map('GET', '/profil/[i:id]/info', function ($id) use ($userController) 
 $router->map('POST', '/profil/[i:id]/edit', function ($id) use ($userController) {
     $userController->editUserInfo($id);
 });
-$router->map( 'GET', '/contact', function() {
-    require_once 'src/View/contact.php';
-});
 
 // map admin page
 $router->map( 'GET', '/admin', function() {
